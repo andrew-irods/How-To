@@ -134,16 +134,20 @@ Click the **"Add..."** button, and a new dialog box opens:
 
 ![Add Sources](images/hello-world-1-image7.png "Don't click OK since we're going to cancel out of this.") 
 
-Pick the "File System Directory" in the "Add Source" dialog, and then enter the full path to the additional folder you want scanned for sources.  Note the "Search subfolders" checkbox at the bottom of the dialog box. Note the checkbox at the bottom to "Search for duplicate source files on the path". 
+Pick the "File System Directory" in the "Add Source" dialog, and then enter the full path to the additional folder you want scanned for sources.  Note the "Search subfolders" checkbox at the bottom of the dialog box. 
 
 **For this exercise, we do not need additional source directories scanned by Eclipse, so click Cancel, and return to the main Explorer window.**
 
 
+### Run the hello-world-1 program ###
 
+Open a "terminal" (aka a shell window).  This can be done inside of eclipse, or outside of it using any terminal or ssh window.  We'll use eclipse for this.  
 
+![Set up runtime environment](images/hello-world-1-image8.png "Start a shell in the bottom pane") 
 
+The bottom horizontal pane in the eclipse workspace should have a "Terminal" tab.  If it doesn't, enter "terminal" in the "Quick Access" field on the top right of the workspace.
 
-
+A list of suggestions pops out. Choose "Commands | Open Local Terminal" to make this tab visible and start a shell going.  Notice that a shell prompt appears within this pane, though not necessarily in the correct directory.  Use "cd" to get to where the executable is, just like you would in any terminal window. 
 
 
 
