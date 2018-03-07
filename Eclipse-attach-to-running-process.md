@@ -46,14 +46,19 @@ int main(int argc, char **argv)
 {
     int i = 1;
     std::string line;
-    while (std::getline((std::cin), line)) {
 
+    do {
+        std::cout << "Please press ENTER (or ctl^d for EOF): " << std::flush;
+        if (!std::getline((std::cin), line)) {
+            break;
+        }
         std::cout << "Hello world no. " << i << "!!!" << std::endl;
         i++;
-    }
-        return 0;
+    } while (true);
+    return 0;
 }
 ~~~
+
 When the program is run, it will echo a line to standard output every time RETURN is hit on the keyboard.  Since it runs until you enter EOF (ctrl^d), it's a good (easy) candidate to attach eclipse to at runtime.  
 
 Now, create the following content in Makefile:
