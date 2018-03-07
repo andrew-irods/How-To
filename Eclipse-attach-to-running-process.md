@@ -183,4 +183,6 @@ There's a lot going on here, now that we are looking at a stack level that we ha
 
 However, we are at an end here - we've attached eclipse to a running sources, and for the rest of what's possible here - it's way outside the scope of this document.  Back to the google machine (search for how to debug a program using eclipse).
 
-#fini#
+##fini## 
+
+
