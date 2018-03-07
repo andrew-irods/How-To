@@ -95,8 +95,7 @@ Thus far we have not used eclipse for anything.  We're going to now create an ec
 From the eclipse File menu, pick the "import..." option  (**File --> Import...**). 
 A new dialog box opens: 
 
-![Import Dialog Box]
-(images/hello-world-1-image1.png "Create an executable project") 
+![Import Executable Path](images/hello-world-1-image1.png "Import C/C++ Executable Files") 
 
 Pick the "C/C++ Executable" option, and click "Next". 
 A new dialog box opens: 
