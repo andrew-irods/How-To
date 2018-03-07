@@ -94,6 +94,29 @@ A new dialog box opens:
 ![Import Dialog Box](images/hello-world-1-image1.png "Create an executable project") 
 
 
+A new dialog box opens: 
+
+![Import Dialog Box](images/hello-world-1-image2.png "Create an executable project") 
+
+A new dialog box opens: 
+
+![Import Dialog Box](images/hello-world-1-image3.png "Create an executable project") 
+
+A new dialog box opens: 
+
+![Import Dialog Box](images/hello-world-1-image4.png "Create an executable project") 
+
+A new dialog box opens: 
+
+![Import Dialog Box](images/hello-world-1-image5.png "Create an executable project") 
+
+A new dialog box opens: 
+
+![Import Dialog Box](images/hello-world-1-image6.png "Create an executable project") 
+
+A new dialog box opens: 
+
+![Import Dialog Box](images/hello-world-1-image7.png "Create an executable project") 
 
 
 
@@ -108,8 +131,3 @@ A new dialog box opens:
 
 
 
-
-
-
-
-	 
