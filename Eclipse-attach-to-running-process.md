@@ -95,7 +95,7 @@ Thus far we have not used eclipse for anything.  We're going to now create an ec
 From the eclipse File menu, pick the "import..." option  (**File --> Import...**). 
 A new dialog box opens: 
 
-![Import Executable Path](images/hello-world-1-image1.png "Import C/C++ Executable Files") 
+![Import Executable Path](images/hello-world-1-image1.png "Choose the C/C++ Executable Files target") 
 
 Pick the "C/C++ Executable" option, and click "Next". 
 A new dialog box opens: 
@@ -110,20 +110,33 @@ Pick a project name, and name the launch configuration (you can leave the names 
 
 Click Finish. A new dialog box opens: 
 
-![Import Dialog Box](images/hello-world-1-image4.png "Create an executable project") 
+![Debug Configurations](images/hello-world-1-image4.png "Name the debug configuration") 
 
-A new dialog box opens: 
+Nothing should change in the Debugger, Source, or Common tabs.  Notice that under the sources tab, you cannot modify anything at this point. This can be done in the next step from the project explorer. 
 
-![Import Dialog Box](images/hello-world-1-image5.png "Create an executable project") 
+Click "Close". This should take you back to the Project Explorer window: 
 
-A new dialog box opens: 
+![Project Explorer](images/hello-world-1-image5.png "Project Explorer") 
 
-![Import Dialog Box](images/hello-world-1-image6.png "Create an executable project") 
+Click on the small arrow next to "**hello-world-1 - [x86_64le**" to show the list of sources found for this executables in the previous step.  Notice that the **hello-world-1.cpp** source file is present in the list of files.  You can double-click and edit it, but this project is not geared for building the executable - just running it.
 
-A new dialog box opens: 
+At this point, we can add more source files to the project by telling eclipse to look in additional source folders if needed.  Right-click on the project name in the expolorer pane, and click on the **"Debug As" -->  "Debug Configurations..."** submenus that pop up.
+ 
+A new dialog box opens (the same dialog box we saw above, but with the ability to make changes): 
 
-![Import Dialog Box](images/hello-world-1-image7.png "Create an executable project") 
+![Debug Configurations Again](images/hello-world-1-image6.png "Modify this configuration if needed") 
 
+Notice that you can pick additional debug configurations at this point. We'll stick to the **"C/C++ Attach to Application"** configuration for this exercise: Highlight the name of the configuration as shown above, and click the "Source" tab in the right pane.
+
+If you don't see all your sources in the explorer pane on the left (and we do - we just have our hello-world-1.cpp file), you can add source directories for eclipse to look for additional sources. 
+
+Click the **"Add..."** button, and a new dialog box opens: 
+
+![Add Sources](images/hello-world-1-image7.png "Don't click OK since we're going to cancel out of this.") 
+
+Pick the "File System Directory" in the "Add Source" dialog, and then enter the full path to the additional folder you want scanned for sources.  Note the "Search subfolders" checkbox at the bottom of the dialog box. Note the checkbox at the bottom to "Search for duplicate source files on the path". 
+
+**For this exercise, we do not need additional source directories scanned by Eclipse, so click Cancel, and return to the main Explorer window.**
 
 
 
