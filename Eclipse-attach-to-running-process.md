@@ -1,11 +1,11 @@
 # How to Attach Eclipse to a Running Process
 
-This document how to attach the Eclipse IDE to a running process. We will first create an eclipse project that targets an existing linux executable, and then create a debug launch configuration which attaches the project to a running executable.
+This document how to attach the Eclipse IDE to a running process. We will first create an eclipse project that targets an existing linux executable, and create a debug launch configuration which attaches the project to a running executable.
 
 
 ### The Thing with Eclipse ###
  
-Eclipse has many features, configuration options, plugins, and supports different platforms and languages. Not all of them work quite as advertised, and it's easy to get lost. It also has many flavors based on the language perspective chosen. The point is (my opinion), load up on patience.  
+Eclipse has many features, configuration options, plugins, and supports different platforms and languages. Not all of them work quite as advertised, and it's easy to get lost. It also has many flavors based on the language perspective chosen. The point is (in my opinion), load up on patience.  
 
 
 ### Assumptions & Caveats ###
@@ -22,7 +22,7 @@ Before tackling this project, it is recommended that you start with the followin
 * Build a small, simple "hello world" application.  Do a google search of "eclipse tutorial", and you'll find dozens of tutorials and examples, including some pretty good video's on youtube.com.
 
 
-* This how-to document really starts when you have an executable that has been built (it does not have to have been built with Eclipse) in debug mode (-g -O0 compiler flags), and to which you know where the sources are.
+* This how-to document really starts when you have an executable that has been built (it does not have to have been built with Eclipse for this exercise) in debug mode (-g -O0 compiler flags), and to which you know where the sources are.
 
 Lastly, much of what happens next is how I work -- there are many ways to do things, and mine is not necessarily the best for you.  YMMV. 
 
@@ -72,7 +72,7 @@ clean:
             rm -f hello-world-1
 ~~~
 
-Don't forget that the delimiter in Makefile is the tab (\t) character, or you will get syntax errors.
+Don't forget that the delimiter in Makefile is the tab (\t) character, or you will get syntax errors. This Makefile will create a single configuration in Debug mode (-g -O0, and the symbols are not stripped from the executable).  When you use Eclipse as a proper IDE, it will have two build modes: Debug and non-Debug (release) modes that you can build and run with.  But that's not important for this exercise.  We just want a debug executable.
 
 Creating the hello-world-1 executable is simply a matter of:
 
