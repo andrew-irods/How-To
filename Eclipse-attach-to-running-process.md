@@ -177,17 +177,10 @@ As soon as the debugger starts, it pauses all the the running threads in the pro
 
 In order to step through our code, and/or set breakpoints, etc - we need to switch to the stack level we want, and that we have sources for.  In this case, it's the bottom of the stack, at hello-world-1.cpp line 12.  So highlight that:
 
+![Go the the bottom of the stack](images/hello-world-1-image12.png "Examine our sources at the breakpoint") 
 
+There's a lot going on here, now that we are looking at a stack level that we have sources for.  If we continued to step through the code, you could see the program counter progressing through the code, variable values changing, and observe what's happening to the stack.
 
+However, we are at an end here - we've attached eclipse to a running sources, and for the rest of what's possible here - it's way outside the scope of this document.  Back to the google machine (search for how to debug a program using eclipse).
 
-
-
-
-
-
-
-
-
-
-
-
+#fini#
