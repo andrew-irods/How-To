@@ -96,8 +96,7 @@ From the eclipse File menu, pick the "import..." option  (**File --> Import...**
 A new dialog box opens: 
 
 ![Import Dialog Box]
-(images/hello-world-1-image1.png 
-"Create an executable project") 
+(images/hello-world-1-image1.png "Create an executable project") 
 
 Pick the "C/C++ Executable" option, and click "Next". 
 A new dialog box opens: 
