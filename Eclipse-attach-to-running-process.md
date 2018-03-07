@@ -1,6 +1,6 @@
 # How to Attach Eclipse to a Running Process
 
-This document how to attach the Eclipse IDE to a running process. We will first create an eclipse project that targets an existing linux executable, and create a debug launch configuration which attaches the project to a running executable.
+This document demonstrates how to attach the Eclipse IDE to a running process. We will first create an eclipse project that targets an existing linux executable, and create a debug launch configuration which attaches the project to a running executable.
 
 
 ### The Thing with Eclipse ###
@@ -92,22 +92,25 @@ So we're now ready to start working with the executable (./hello-world-1):
 
 Thus far we have not used eclipse for anything.  We're going to now create an eclipse project which revolves around the executable above (./hello-world-1).   
 
-* From the eclipse File menu, pick the "import..." option  (File --> Import...) 
-
+From the eclipse File menu, pick the "import..." option  (**File --> Import...**). 
 A new dialog box opens: 
 
-![Import Dialog Box](images/hello-world-1-image1.png "Create an executable project") 
+![Import Dialog Box]
+(images/hello-world-1-image1.png 
+"Create an executable project") 
 
-
+Pick the "C/C++ Executable" option, and click "Next". 
 A new dialog box opens: 
 
-![Import Dialog Box](images/hello-world-1-image2.png "Create an executable project") 
+![Import Executable Path](images/hello-world-1-image2.png "Import C/C++ Executable Files") 
 
-A new dialog box opens: 
+Click on "Select Executable", find the executable we created up above (hello-world-1), and enter its path.  Click "Next".  A new dialog box opens: 
 
-![Import Dialog Box](images/hello-world-1-image3.png "Create an executable project") 
+![Choose Project](images/hello-world-1-image3.png "Create an a new executable project") 
 
-A new dialog box opens: 
+Pick a project name, and name the launch configuration (you can leave the names that Eclipse chose for you if they're reasonable). Click the "Create a Launch Configuration" checkbox, and choose  "C/C++ Attach to Application" from the drop-down menu. 
+
+Click Finish. A new dialog box opens: 
 
 ![Import Dialog Box](images/hello-world-1-image4.png "Create an executable project") 
 
