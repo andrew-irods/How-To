@@ -1,6 +1,7 @@
-# How-To
+# Collection of How-To's
 
-Collection of how-to's
+[How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
 
-The first document is on how to attach eclipse to a running process
+
+
 
