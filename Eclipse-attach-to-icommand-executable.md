@@ -124,24 +124,16 @@ First we'll set up the runtime command line parameters.  Click on the "Arguments
 
 The information shown is imaginary of course.  Before we run the debugger for real, we will need to refer to an existing iRODS resource, an existing user directory or file, and a real target. Enter the information, and then click on the "Source" tab:
 
-![Choose Project](images/debug-icmds-image7.png "Create an a new executable project") 
+![Add source folder(s)](images/debug-icmds-image7.png "Enter sources' paths") 
 
-Temporary text while under construction
+Click and highlight Debug\_ireg.  Click "Add...", pick "File System Directory" from the next dialog box, and finally type in or browse to the source directory for irods_client_icommands.
 
+Click "OK". After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box.  (Do not click "Debug").
 
-![Choose Project](images/debug-icmds-image8.png "Create an a new executable project") 
+![Project Explorer file listing](images/debug-icmds-image8.png "Explorer File Listing") 
 
-Temporary text while under construction
+Click on the small arrow next to **ireg-[x86_64le]** in the Project Eplorer pane on the left.  This will expand and show the list of source files gathered in the previous step. Opening any one of these files (double-click, for example), will display the source file in the main center-right pane.
 
-
-![Choose Project](images/debug-icmds-image9.png "Create an a new executable project") 
-
-Temporary text while under construction
-
-
-![Choose Project](images/debug-icmds-image10.png "Create an a new executable project") 
-
-Temporary text while under construction
 
 
 ![Choose Project](images/debug-icmds-image11.png "Create an a new executable project") 
