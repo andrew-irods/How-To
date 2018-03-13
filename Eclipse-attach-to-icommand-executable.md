@@ -98,25 +98,23 @@ The next screen you see is the opening window.  I tend to dismiss that window fo
 
 ![Splash](images/debug-icmds-image1-1.png "Move on to the worksbench") 
 
-Now that the workbench is open, 
+Now that the workbench is open, import the executable.  Click "File" --> "Import...":
 
 ![Import](images/debug-icmds-image1-5.png "Import the executable /usr/bin/ireg") 
 
-Now that the workbench is open, 
+Click on the arrow next to C/C++:
+ 
+![Import Executable](images/debug-icmds-image2.png "Type in /usr/bin/ireg") 
 
-![Choose Project](images/debug-icmds-image2.png "Create an a new executable project") 
+Choose "C/C++ Executable".  Click "Next". 
 
-Temporary text while under construction
-
-
-![Choose Project](images/debug-icmds-image3.png "Create an a new executable project") 
-
-Temporary text while under construction
+![Choose Project](images/debug-icmds-image3.png "Type in /usr/bin/ireg") 
 
 
-![Choose Project](images/debug-icmds-image4.png "Create an a new executable project") 
 
-Temporary text while under construction
+![Choose Project](images/debug-icmds-image4.png "Enter project name and launch configuration") 
+
+In the dialog above, you can use the names eclipse sets up, or enter your own, then click "Finish".
 
 
 ![Choose Project](images/debug-icmds-image5.png "Create an a new executable project") 
