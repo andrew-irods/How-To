@@ -100,7 +100,7 @@ The next screen you see is the opening window.  I tend to dismiss that window fo
 
 Now that the workbench is open, 
 
-![Import](images/debug-icmds-image151.png "Import the executable /usr/bin/ireg") 
+![Import](images/debug-icmds-image1-5.png "Import the executable /usr/bin/ireg") 
 
 Now that the workbench is open, 
 
