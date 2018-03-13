@@ -69,8 +69,8 @@ The sources we want (for /usr/bin/ireg) are in the "irods\_client\_icommands/" f
 
 ~~~
 # mkdir -p /home/irods-persistent
---->  this is optional:  rm -rf /home/irods-persistent/irods_clients_icommands  
-# cp -r irods_clients_icommands/ /home/irods-persistent 
+## --->  this is optional: ## rm -rf /home/irods-persistent/irods_client_icommands  
+# cp -r irods_client_icommands/ /home/irods-persistent 
 # chown -R irods:irods /home/irods-persistent
 ~~~
 
@@ -79,10 +79,10 @@ Now, become the user "irods", find the "ireg" executable, and start eclipse (fro
 ~~~
 # su - irods
 irods@akellydt1:~$ pwd
-/home/irods
+/var/lib/irods
 irods@akellydt1:~$ which ireg
 /usr/bin/ireg
-irods@akellydt1:~$ /opt/eclipse/eclipse
+irods@akellydt1:~$ /opt/eclipse/eclipse   # Your installation folder might be different.
 
 ~~~
 
@@ -92,11 +92,17 @@ The first thing that happens, is a dialog box that eclipse shows:
 
 ![Workspace](images/debug-icmds-image1.png "Choose a workspace for the irods user") 
 
-It suggests to use "/home/irods/eclipse-workspace" as the folder it should use for the workspace.  Override this by updating the path to "/home/irods-persistent/eclipse-workspace", and click "Launch".
+It suggests to use "/var/lib/irods/eclipse-workspace" as the folder it should use for the workspace.  Override this by updating the path to "/home/irods-persistent/eclipse-workspace", and click "Launch".
 
 The next screen you see is the opening window.  I tend to dismiss that window forever, and go to the actual workbench:
 
 ![Splash](images/debug-icmds-image1-1.png "Move on to the worksbench") 
+
+Now that the workbench is open, 
+
+![Import](images/debug-icmds-image151.png "Import the executable /usr/bin/ireg") 
+
+Now that the workbench is open, 
 
 ![Choose Project](images/debug-icmds-image2.png "Create an a new executable project") 
 
