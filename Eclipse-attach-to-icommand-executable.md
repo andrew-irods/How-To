@@ -116,16 +116,13 @@ Type in "/usr/bin/ireg", and click "Next".
 
 In the dialog above, you can use the names eclipse sets up, or enter your own, then click "Finish".
 
+The next dialog pops up. This is where you can enter information about the runtime environment for the debugged executable, as well as where the sources are:
 
-![Choose Project](images/debug-icmds-image5.png "Create an a new executable project") 
+First we'll set up the runtime command line parameters.  Click on the "Arguments" tab:
 
-Temporary text while under construction
+![Enter runtime program arguments](images/debug-icmds-image6.png "Enter runtime program arguments") 
 
-
-![Choose Project](images/debug-icmds-image6.png "Create an a new executable project") 
-
-Temporary text while under construction
-
+The information shown is imaginary of course.  Before we run the debugger for real, we will need to refer to an existing iRODS resource, an existing user directory or file, and a real target. Enter the information, and then click on the "Source" tab:
 
 ![Choose Project](images/debug-icmds-image7.png "Create an a new executable project") 
 
