@@ -40,11 +40,63 @@ Lastly, much of what happens next is how I work -- there are many ways to do thi
 
 ### Preparations 
 
+Lets assume your developer user name is "akelly", and that your git repository sources are under the path "/home/akelly/src/renci/".  
 
-![Choose Project](images/debug-icmds-image1.png "Create an a new executable project") 
+You first have to create the runtime environment for eclipse under the user identity (authority) of "irods".  
 
+This means that the user "irods" exists and has a sane user environment (i.e. all the prerequisite packages to run iRODS on your system have been installed, and that the "irodsServer" process is running.  See the links in the previous section).
 
-Temporary text while under construction
+We're going to use a somewhat temporary folder "/home/irods-persistent" to house both the eclipse workspace, as well as the copy of the sources we're going to make, for the "irods" user:
+
+~~~
+$ sudo su
+<password>
+# cd ~akelly/src/renci
+# ls -l
+total 36
+drwxrwxr-x  9 akelly akelly 4096 Mar 11 13:21 ./
+drwxrwxr-x 15 akelly akelly 4096 Mar 10 16:34 ../
+drwxrwxr-x  8 akelly akelly 4096 Mar 12 15:23 bld_irods/
+drwxrwxr-x  5 akelly akelly 4096 Mar 12 15:27 bld_irods_client_icommands/
+drwxrwxr-x  4 akelly akelly 4096 Mar 10 22:01 How-To/
+drwxr-xr-x  4 akelly akelly 4096 Mar 10 16:34 How-To.bak/
+drwxrwxr-x 15 akelly akelly 4096 Mar 10 21:55 irods/
+drwxrwxr-x 10 akelly akelly 4096 Mar 10 22:06 irods_client_icommands/
+drwxrwxr-x  5 akelly akelly 4096 Mar 11 13:21 irods_training/
+~~~
+
+The sources we want (for /usr/bin/ireg) are in the "irods\_client\_icommands/" folder.  Create the target folder if it doesn't exist already, and copy the sources there.
+
+~~~
+# mkdir -p /home/irods-persistent
+--->  this is optional:  rm -rf /home/irods-persistent/irods_clients_icommands  
+# cp -r irods_clients_icommands/ /home/irods-persistent 
+# chown -R irods:irods /home/irods-persistent
+~~~
+
+Now, become the user "irods", find the "ireg" executable, and start eclipse (from the command line). Still as superuser:
+
+~~~
+# su - irods
+irods@akellydt1:~$ pwd
+/home/irods
+irods@akellydt1:~$ which ireg
+/usr/bin/ireg
+irods@akellydt1:~$ /opt/eclipse/eclipse
+
+~~~
+
+At this point, eclipse comes up -- the terminal you invoke it from is waiting for it to exit, and you will see many messages from eclipse.  Those may safely be ignored.
+
+The first thing that happens, is a dialog box that eclipse shows:
+
+![Workspace](images/debug-icmds-image1.png "Choose a workspace for the irods user") 
+
+It suggests to use "/home/irods/eclipse-workspace" as the folder it should use for the workspace.  Override this by updating the path to "/home/irods-persistent/eclipse-workspace", and click "Launch".
+
+The next screen you see is the opening window.  I tend to dismiss that window forever, and go to the actual workbench:
+
+![Splash](images/debug-icmds-image1-1.png "Move on to the worksbench") 
 
 ![Choose Project](images/debug-icmds-image2.png "Create an a new executable project") 
 
