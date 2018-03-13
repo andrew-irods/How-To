@@ -104,13 +104,13 @@ Now that the workbench is open, import the executable.  Click "File" --> "Import
 
 Click on the arrow next to C/C++:
  
-![Import Executable](images/debug-icmds-image2.png "Type in /usr/bin/ireg") 
+![Import Executable](images/debug-icmds-image2.png "Choose C/C++ Executable") 
 
 Choose "C/C++ Executable".  Click "Next". 
 
 ![Choose Project](images/debug-icmds-image3.png "Type in /usr/bin/ireg") 
 
-
+Type in "/usr/bin/ireg", and click "Next".
 
 ![Choose Project](images/debug-icmds-image4.png "Enter project name and launch configuration") 
 
