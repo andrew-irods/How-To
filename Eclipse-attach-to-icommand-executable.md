@@ -134,20 +134,17 @@ Click "OK". After the two dialog boxes disappear, click on "Apply" and "Close" o
 
 Click on the small arrow next to **ireg-[x86_64le]** in the Project Eplorer pane on the left.  This will expand and show the list of source files gathered in the previous step. Opening any one of these files (double-click, for example), will display the source file in the main center-right pane.
 
+### Start the debugger
 
+Right click on the **ireg-[x86_64le]** line in the project explorer, and choose "Debug As   ->", and then pick "Local C/C++ Application".  What opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
 
-![Choose Project](images/debug-icmds-image11.png "Create an a new executable project") 
+![Switch Perspectives](images/debug-icmds-image11.png "Switch Perspectives: click Yes") 
 
-Temporary text while under construction
-
+What opens up is the Debug Perspective, with the program running, stopped at a breakpoint just inside the main() function:
 
 ![Choose Project](images/debug-icmds-image12.png "Create an a new executable project") 
 
-Temporary text while under construction
+So **ireg** the program is running, under our control.  We are stopped right at the beginning of the program, and shouldn't really continue much further, since the command line parameters entered into Eclipse, were quite imaginary. 
 
-
-However, we are at an end here - we've attached eclipse to a running sources, and for the rest of what's possible here - it's way outside the scope of this document.  Back to the google machine (search for how to debug a program using eclipse).
-
-
-
+The actual debugging of the program is beyond the scope of this document. 
 
