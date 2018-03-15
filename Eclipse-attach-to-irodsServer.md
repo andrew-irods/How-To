@@ -1,10 +1,19 @@
-# How to Create an Eclipse project for /usr/bin/ireg
+# How to Attach Eclipse to a Running irodsServer Process
 
-This document demonstrates how to create an eclipse project revolving around the **ireg** app executable, which, with the available sources for the project, will allow the developer to start the app, step through code, and examine variable and object values, in short - debug the process.
+Assuming a system with an installed iRODS build (and runtime system), this document demonstrates how to create an Eclipse debug session attached to the running /usr/bin/irodsServer process.
 
-This operation will not build the ireg app at all, simply debug it.  This can be applied to any of the icommands in /usr/bin.
+This operation will not build the irodsServer app at all, simply debug it. 
 
-The eclipse debugger will be run as yourself (the linux user -- "andrew" in my case).  The iRODS user used for this exercise, is **rods** (which is the same iRODS used by the **irods** linux user). There's just a minor setup step needed for that (see below).
+The eclipse debugger will be run as the user **root**.  As such it will have access to all source files maintained by the developer, and most importantly, be able to attach to the running irodsServer process. 
+
+**Important Note**:  
+
+sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope
+
+
+
+https://docs.irods.org
+
 
 
 ### Assumptions & Caveats ###
@@ -29,67 +38,7 @@ Lastly, much of what happens next is how I work -- there are many ways to do thi
 
 ### Preparations 
 
-Lets assume your developer user name is **akelly**, and that your git repository sources are under the path "/home/akelly/src/renci/".  
-
-The first task is to get "akelly" set up as an iRODS user. In order to do that we need to establish akelly's **andrew** (iRODS) identity, and use the **iinit** command.  In order to do that, follow this process:
-
-Become the "irods" user, who has the **rods** iRODS identity, and can add the user **andrew** and set some basic paramters:
-
-~~~
-akelly@akelly1:~$ sudo su - irods
-<password>
-irods@akelly1:~$ iadmin mkuser andrew rodsuser
-irods@akelly1:~$ iadmin moduser andrew password xx0000
-irods@akelly1:~$ exit
-akelly@akelly1: $
-~~~
-
-So the linux user "akelly" now also has an iRODS user identity called "andrew", with a password (xx0000), and a regular "roduser" profile (run "iiadmin lu andrew" to see all possible types of users).
-
-Next, the Linux user **akelly** should run the **iinit** icommand to give iRODS some paramters about us:
-
-As the linux user **akelly**, do the following: run **iinit** (do ignore the initial errors that pop up, and answer the questions):
-
-~~~
-akelly@akelly1:~$ iinit
- ERROR: environment_properties::capture: missing environment file. should be at [/home/andrew/.irods/irods_environment.json]
- One or more fields in your iRODS environment file (irods_environment.json) are
- missing; please enter them.
- Enter the host name (DNS) of the server to connect to: akelly1.europa.renci.org
- Enter the port number: 1247
- Enter your irods user name: andrew
- Enter your irods zone: tempZone
- Those values will be added to your environment file (for use by
- other iCommands) if the login succeeds.
-
- Enter your current iRODS password: xx0000 
- ~~~
-
-Of the responses given above:
-**akelly1.europa.renci.org** 
-
-	is the system name for the system as shown on the /etc/hosts line containing the localhost entry (127.0.0.1).
-
-**1247** 
-
-	is the default port number for irodsServer
-	
-**andrew**
-
-	is the chosen iRODS user name for akelly's account, as entered in the previous section.
-	
-**tempZone**
-
-	Happends to be the default zone.
-	
-**xx0000**
-
-	Is the password in iRODS for "andrew", as set up by the iiadmin command in the previous step.
-
-<span style="color:red">
--- UNDER CONSTRUCTION --
-</span>
-
+Lets assume your developer user name is "akelly", and that your git repository sources are under the path "/home/akelly/src/renci/".  
 
 You first have to create the runtime environment for eclipse under the user identity (authority) of "irods".  
 
