@@ -4,7 +4,7 @@ This document demonstrates how to create an eclipse project revolving around the
 
 This operation will not build the ireg app at all, simply debug it.  This can be applied to any of the icommands in /usr/bin.
 
-The eclipse debugger will be run as yourself (the linux user -- "andrew" in my case).  The iRODS user used for this exercise, is **rods** (which is the same iRODS used by the **irods** linux user). There's just a minor setup step needed for that (see below).
+The eclipse debugger will be run as yourself (the linux user -- "akelly" in my case).  The iRODS user used for this exercise, will be **andrew** (which is a new user to be added to iRODS on this system by the **irods** linux user). There's just a minor setup step needed for that (see below).
 
 
 ### Assumptions & Caveats ###
@@ -33,7 +33,7 @@ Lets assume your developer user name is **akelly**, and that your git repository
 
 The first task is to get "akelly" set up as an iRODS user. In order to do that we need to establish akelly's **andrew** (iRODS) identity, and use the **iinit** command.  In order to do that, follow this process:
 
-Become the "irods" user, who has the **rods** iRODS identity, and can add the user **andrew** and set some basic paramters:
+Become the "irods" user, who has the **rods** (admin) iRODS identity, and who can add the user **andrew** and set some basic paramters:
 
 ~~~
 akelly@akelly1:~$ sudo su - irods
