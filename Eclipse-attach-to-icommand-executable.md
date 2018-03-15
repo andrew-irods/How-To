@@ -52,7 +52,8 @@ As the linux user **akelly**, do the following: run **iinit** (do ignore the ini
 
 ~~~
 akelly@akelly1:~$ iinit
- ERROR: environment_properties::capture: missing environment file. should be at [/home/andrew/.irods/irods_environment.json]
+ ERROR: environment_properties::capture: missing environment file. should be \
+                 at [/home/andrew/.irods/irods_environment.json]
  One or more fields in your iRODS environment file (irods_environment.json) are
  missing; please enter them.
  Enter the host name (DNS) of the server to connect to: akelly1.europa.renci.org
@@ -66,29 +67,18 @@ akelly@akelly1:~$ iinit
  ~~~
 
 Of the responses given above:
-**akelly1.europa.renci.org** 
 
-	is the system name for the system as shown on the /etc/hosts line containing the localhost entry (127.0.0.1).
+**akelly1.europa.renci.org** -- is the system name for the system as shown on the /etc/hosts line containing the localhost entry (127.0.0.1).
 
-**1247** 
-
-	is the default port number for irodsServer
+**1247** -- is the default port number for irodsServer
 	
-**andrew**
-
-	is the chosen iRODS user name for akelly's account, as entered in the previous section.
+**andrew** -- is the chosen iRODS user name for akelly's account, as entered in the previous section.
 	
-**tempZone**
-
-	Happends to be the default zone.
+**tempZone** -- Happens to be the default zone.
 	
-**xx0000**
+**xx0000** -- Is the password in iRODS for "andrew", as set up by the iiadmin command in the previous step.
 
-	Is the password in iRODS for "andrew", as set up by the iiadmin command in the previous step.
-
-<span style="color:red">
--- UNDER CONSTRUCTION --
-</span>
+# -- UNDER CONSTRUCTION -- #
 
 
 You first have to create the runtime environment for eclipse under the user identity (authority) of "irods".  
