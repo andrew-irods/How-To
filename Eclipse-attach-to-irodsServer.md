@@ -171,7 +171,7 @@ After attaching to the running process, what opens up is this dialog, asking whe
 
 What opens up is the Debug Perspective, with irodsServer running, with all threads stopped:
 
-![Suspended app](images/debug-icmds-image12.png "First debug view of suspended irodsServer") 
+![Suspended app](images/debug-iserver-image12.png "First debug view of suspended irodsServer") 
 
 You can see one of the suspended threads showing it's call stack, with the breakpoint typically at a select() call, waiting for network events.
 
@@ -179,7 +179,7 @@ You can see one of the suspended threads showing it's call stack, with the break
 
 However, we want to take another look at what's going on, so we'll stay paused so we can see the next screen:
 
-![Stack frame](images/debug-icmds-image13.png "Viewing source line for suspended irodsServer thread")
+![Stack frame](images/debug-iserver-image13.png "Viewing source line for suspended irodsServer thread")
 
 Notice that we've gone down one frame in the stack trace (top left pane).  To do this, click on the line you want to view sources for. Since this (rodsServer.cpp line# 499) is the highest stack level for which we have sources, this is the one we pick. 
 
