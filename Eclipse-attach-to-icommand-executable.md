@@ -151,7 +151,7 @@ First we'll set up the runtime command line parameters.  Click on the "Arguments
 
 The information shown is imaginary of course.  Before we run the debugger for real, we will need to refer to an existing iRODS resource, an existing user directory or file, and a real target. Enter the information, and then click on the "Source" tab:
 
-![Add source folder(s)](images/debug-icmds-image7.png "Enter sources' paths") 
+![Add source folder(s)](images/debug-icmds-image7.png "To view an enlarged image, right-click on the image and pick \"Open image in new tab\" ") 
 
 Click and highlight Debug\_ireg.  Click "Add...", pick "File System Directory" from the next dialog box, and finally type in or browse to the source directory for irods_client_icommands.
 
@@ -169,7 +169,7 @@ Right click on the **ireg-[x86_64le]** line in the project explorer, and choose 
 
 What opens up is the Debug Perspective, with the program running, stopped at a breakpoint just inside the main() function:
 
-![Choose Project](images/debug-icmds-image12.png "Create an a new executable project") 
+![Choose Project](images/debug-icmds-image12.png "To view an enlarged image, right-click on the image and pick \"Open image in new tab\" ") 
 
 So **ireg** the program is running, under our control.  We are stopped right at the beginning of the program, and shouldn't really continue much further, since the command line parameters entered into Eclipse, were quite imaginary. 
 
