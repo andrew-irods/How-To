@@ -63,8 +63,9 @@ Lets assume your linux developer user name is "akelly", and that your git reposi
 
 If you do not have one, create an iRODS identity to use from your linux user account.  (Mine is "andrew", used in the examples below).  See the iRODS documentation for how to create a user (with **iadmin**), and initialize the environment (with **iinit**).
 
-Assuming you have successfully installed eclipse, successfully built the sources for **irodsServer** and installed the resulting **icommands** on your system, we are now ready to begin creating an Eclipse debug session which will attach to a running **irodsServer** process. 
+Assuming that eclipse has been successfully installed, and that the sources for **irods** and **icommands** have been successfully built and installed, we are now ready to begin creating an Eclipse debug session which will attach to a running **irodsServer** process. 
 
+As the user **akelly** (use your own developer id and paths please):
 ~~~
 akelly@akellydt1:~$ cd ~akelly/src/renci
 akelly@akellydt1:~$ ls -l
@@ -91,25 +92,25 @@ At this point, eclipse comes up -- the terminal you invoke it from is waiting fo
 
 The first thing that happens, is a dialog box that eclipse shows:
 
-![Workspace](images/debug-icmds-image1.png "Choose a workspace for the irods user") 
+![Workspace](images/debug-iserver-image1.png "Choose a workspace for the irods user") 
 
 Unless you have some reason to modify it, leave the workspace path as it is.
 
 The next screen you see is the opening window.  I tend to dismiss that window forever, and go to the actual workbench:
 
-![Splash](images/debug-icmds-image1-1.png "Move on to the worksbench") 
+![Splash](images/debug-iserver-image1-1.png "Move on to the worksbench") 
 
 Now that the workbench is open, import the executable.  Click "File" --> "Import...":
 
-![Import](images/debug-icmds-image1-5.png "Import the executable /usr/bin/ireg") 
+![Import](images/debug-iserver-image1-5.png "Import the executable /usr/sbin/irodsServer") 
 
 Click on the arrow next to C/C++:
  
-![Import Executable](images/debug-icmds-image2.png "Choose C/C++ Executable") 
+![Import Executable](images/debug-iserver-image2.png "Choose C/C++ Executable") 
 
 Choose "C/C++ Executable".  Click "Next". 
 
-![Choose Project](images/debug-icmds-image3.png "Type in /usr/bin/ireg") 
+![Choose Project](images/debug-iserver-image3.png "Type in /usr/sbin/irodsServer") 
 
 Type in "/usr/bin/ireg", and click "Next".
 
