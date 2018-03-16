@@ -11,6 +11,11 @@ The eclipse debugger will be run as the user **akelly** in this document.  Pleas
 The linux system we mostly use for development (Ubuntu, currently it is mostly version 16.04) is installed with a restricted ability for **ptrace** to attach a debugger to a running process.  The security module is called **Yama**, and by default it runs in mode "1", which is a restrictive ability. This configuration will allow your debugger to start, run, or attach to **your** executable (running as a regular process with your linux user-id). In order to attach a debugger to a running server process (see documentation links below), this mode has to be changed to "0" in most cases. This is a run-time configuration set by modifying a file under **/proc**:
 
 ~~~
+root@akellydt1:/home/akelly/src/renci/How-To/images# sysctl kernel.yama.ptrace_scope=0
+kernel.yama.ptrace_scope = 0
+root@akellydt1:/home/akelly/src/renci/How-To/images# sysctl kernel.yama.ptrace_scope
+kernel.yama.ptrace_scope = 0
+
 $ sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope
 ~~~
 
@@ -18,7 +23,6 @@ You can verify the configuration by running:
 
 ~~~
 akelly@akellydt1:~$ sudo sysctl kernel.yama.ptrace_scope
-<password>
 kernel.yama.ptrace_scope = 0
 ~~~
 
@@ -101,7 +105,7 @@ The next screen you see is the opening window.  I tend to dismiss that window fo
 
 ![Splash](images/debug-iserver-image1-1.png "Move on to the worksbench") 
 
-Now that the workbench is open, import the executable.  Click "File" --> "Import...":
+Now that the workbench is open, import the executable.  Click "File" --> "Import...", and this dialog opens up:
 
 ![Import](images/debug-iserver-image1-5.png "Import the executable /usr/sbin/irodsServer") 
 
@@ -117,7 +121,7 @@ Type in "/usr/sbin/irodsServer", and click "Next".
 
 ![Choose Project](images/debug-iserver-image4.png "Enter project name and launch configuration") 
 
-In the dialog above, you can use the names eclipse sets up, or enter your own, then click "Finish".
+In the dialog above, click on the drop-down menu next to "Create a Launch Configuration:", and pick "C/C++ Attach to Application".  Then, you can use the names eclipse sets up, or enter your own, then click "Finish".
 
 The next dialog pops up. This is where you can enter where the sources are. Click on the "Source" tab:
 
@@ -143,7 +147,7 @@ Click the small arrow next to "C/C++ Attach to Application" if that section is n
 
 What opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
 
-![Switch Perspectives](images/debug-icmds-image11.png "Switch Perspectives: click Yes") 
+![Switch Perspectives](images/debug-iserver-image11.png "Switch Perspectives: click Yes") 
 
 What opens up is the Debug Perspective, with the program running, stopped at a breakpoint just inside the main() function:
 
