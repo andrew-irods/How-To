@@ -17,7 +17,8 @@ $ sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope
 You can verify the configuration by running:
 
 ~~~
-akelly@akellydt1:~$ sysctl kernel.yama.ptrace_scope
+akelly@akellydt1:~$ sudo sysctl kernel.yama.ptrace_scope
+<password>
 kernel.yama.ptrace_scope = 0
 ~~~
 
