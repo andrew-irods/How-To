@@ -55,7 +55,9 @@ int main(int argc, char **argv)
         std::cout << "Hello world no. " << i << "!!!" << std::endl;
         i++;
     } while (true);
-    return 0;
+    
+    std::cout << std::endl;
+    return 0;
 }
 ~~~
 
