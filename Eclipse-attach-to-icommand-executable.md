@@ -1,6 +1,3 @@
-# -- UNDER CONSTRUCTION -- #
-
-
 # How to Create an Eclipse project for /usr/bin/ireg
 
 This document demonstrates how to create an eclipse project revolving around the **ireg** app executable, which, with the available sources for the project, will allow the developer to start the app, step through code, and examine variable and object values, in short - debug the process.
@@ -122,7 +119,7 @@ The first thing that happens, is a dialog box that eclipse shows:
 
 ![Workspace](images/debug-icmds-image1.png "Choose a workspace for the irods user") 
 
-It suggests to use "/var/lib/irods/eclipse-workspace" as the folder it should use for the workspace.  Override this by updating the path to "/home/irods-persistent/eclipse-workspace", and click "Launch".
+Check the workspace path, and click "Launch".
 
 The next screen you see is the opening window.  I tend to dismiss that window forever, and go to the actual workbench:
 
