@@ -3,7 +3,7 @@
 This document is an accumulation of notes about Eclipse with C/C++ for 64 bit Linux, in no particular order. 
 
 
-### Where to install it ###
+### Installation ###
  
 The easiest thing to do, is to go to [https://www.eclipse.org/downloads/](https://www.eclipse.org/downloads/) and follow the links to download the 64-bit "Oxygen" release.
 
