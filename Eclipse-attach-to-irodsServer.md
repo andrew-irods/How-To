@@ -37,6 +37,12 @@ A definition of the facility can be found here:
 
 [https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt) 
 
+### Another Important Note ###
+
+Debugging the irodsServer process (any server process, for that matter) carries the risk of mucking up its state (sanity).  Stepping through the code used by one or more threads, can cause inconsistencies and failures within other threads (related to timeouts, or other causes) which create problems a bit later in the server's life.  
+
+It is strongly recommended that after every debug session, the irods runtime environment be restarted. 
+
 
 ### Assumptions & Caveats ###
 
@@ -131,7 +137,7 @@ Click the arrow next to "C/C++ Attach to Application", and then and highlight De
 
 Click "OK". 
 
-After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box. (At that point, you could have started debugging by clicking "Debug" after the "Apply" instead of "Close", but we want to demonstrate how to start the debug session on subsequent runs.
+After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box. (At that point, you could have started debugging by clicking "Debug" after the "Apply" instead of "Close", but we want to demonstrate how to start the debug session on subsequent runs, when there's no need to change this debug configuration).
 
 ![Project Explorer file listing](images/debug-iserver-image8.png "Explorer File Listing") 
 
@@ -147,15 +153,19 @@ There is more to be said about which specific irodsServer process you need to at
 
 For the purpose of this exercise, click one of the irodsServer processes (say PID# 2421), and click "OK"
 
+** Potential Error **
 
+If for some reason the attempt by eclipse to attach to the process you chose, this would be the point at which it shows up.  For example: 
 
+![Problem Occurred](images/debug-iserver-image10-5.png "Error in final launch sequence") 
 
+This may be an irodsServer process which is in a bad state because of previous debug operations.  Restart the irods environment to fix the problem.
+ 
+Or, this could be a manifestation of the ptrace failure described in the **Important Note** section outlined at the beginning of this document.  To recover, follow the process shown there, and restart your debug session. 
 
+** Next step **
 
-
-
-
-What opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
+After attaching to the running process, what opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
 
 ![Switch Perspectives](images/debug-iserver-image11.png "Switch Perspectives: click Yes") 
 
