@@ -131,7 +131,7 @@ Click the arrow next to "C/C++ Attach to Application", and then and highlight De
 
 Click "OK". 
 
-After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box.  (Do not click "Debug").
+After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box. (At that point, you could have started debugging by clicking "Debug" after the "Apply" instead of "Close", but we want to demonstrate how to start the debug session on subsequent runs.
 
 ![Project Explorer file listing](images/debug-iserver-image8.png "Explorer File Listing") 
 
@@ -139,11 +139,21 @@ Click on the small arrow next to **irodsServer -[x86_64le]** in the Project Eplo
 
 ### Start the debugger
 
-Open the "Run" menu from the top title-bar. Choose "Debug Configurations..." (or, you can get the same thing by right clicking the **irodsServer-[x86_64le]** line in the project explorer, and choosing "Debug As   ->", and then picking "Debug Configurations..."):  
+Open the "Run" menu from the top title-bar. Choose "Debug As..." (or, you can get the same thing by right clicking the **irodsServer-[x86_64le]** line in the project explorer, and choosing "Debug As   ->"), and then pick "Local C/C++ Application".  (An alternative is to go into "Debug Configurations..." in click "Debug" there).  The next dialog box will allow you to choose which running process to attach to:
 
-![Create, Manage, and run configurations](images/debug-iserver-image9.png "Click the Debug button") 
+![Select Processes](images/debug-iserver-image10.png "Pick the specific irodsServer process you want to attach the debugger to...") 
 
-Click the small arrow next to "C/C++ Attach to Application" if that section is not open, and then highlight (click on) the "Debug_irodsServer Configuration" line. Click Debug button.
+There is more to be said about which specific irodsServer process you need to attach to. There are at least two, but there may be dozens.  The specific PID to attach to can be found in the irods logs, but we're not going to cover that here. 
+
+For the purpose of this exercise, click one of the irodsServer processes (say PID# 2421), and click "OK"
+
+
+
+
+
+
+
+
 
 What opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
 
