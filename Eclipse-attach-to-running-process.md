@@ -112,7 +112,7 @@ Click Finish. A new dialog box opens:
 
 ![Debug Configurations](images/hello-world-1-image4.png "Name the debug configuration") 
 
-Nothing should change in the Debugger, Source, or Common tabs.  Notice that under the sources tab, you cannot modify anything at this point. This can be done in the next step from the project explorer. 
+Nothing has to change in the Debugger, Source, or Common tabs.  We will add source files to the project in the next step from the project explorer. 
 
 Click "Close". This should take you back to the Project Explorer window: 
 
