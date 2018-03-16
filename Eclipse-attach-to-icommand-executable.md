@@ -1,3 +1,6 @@
+# -- UNDER CONSTRUCTION -- #
+
+
 # How to Create an Eclipse project for /usr/bin/ireg
 
 This document demonstrates how to create an eclipse project revolving around the **ireg** app executable, which, with the available sources for the project, will allow the developer to start the app, step through code, and examine variable and object values, in short - debug the process.
@@ -22,17 +25,20 @@ Before tackling this project, it is recommended that you start with the followin
 
 * Put together your **irods** development environment. See https://github.com/d-w-moore/irods-dev-orientation as a starting point. 
 
-
 * Go over this HOWTO: [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md). 
 
 Lastly, much of what happens next is how I work -- there are many ways to do things, and mine is not necessarily the best for you.  YMMV. 
 
 ### Preparations 
 
-Lets assume your developer user name is **akelly**, and that your git repository sources are under the path "/home/akelly/src/renci/".  
+Lets assume your developer user name is **akelly**, and that your git repository sources are under the path "/home/akelly/src/renci/".  (In the instructions below, change the "akelly" and "source path below to your own information).
 
-The first task is to get "akelly" set up as an iRODS user. In order to do that we need to establish akelly's **andrew** (iRODS) identity, and use the **iinit** command.  In order to do that, follow this process:
+The first task is to get "akelly" set up as an iRODS user. In order to do that we need to establish akelly's **andrew** (iRODS) identity, and use the **iinit** command. 
 
+(Ref: The configuration section of the docs site online [https://docs.irods.org/4.1.2/manual/configuration/](https://docs.irods.org/4.1.2/manual/configuration/).
+
+Follow this process:
+ 
 Become the "irods" user, who has the **rods** (admin) iRODS identity, and who can add the user **andrew** and set some basic paramters:
 
 ~~~
@@ -45,6 +51,8 @@ akelly@akelly1: $
 ~~~
 
 So the linux user "akelly" now also has an iRODS user identity called "andrew", with a password (xx0000), and a regular "roduser" profile (run "iiadmin lu andrew" to see all possible types of users).
+
+(Ref: [https://docs.irods.org/4.1.2/icommands/user/#iinit](https://docs.irods.org/4.1.2/icommands/user/#iinit) )
 
 Next, the Linux user **akelly** should run the **iinit** icommand to give iRODS some paramters about us:
 
@@ -78,50 +86,33 @@ Of the responses given above:
 	
 **xx0000** -- Is the password in iRODS for "andrew", as set up by the iiadmin command in the previous step.
 
-# -- UNDER CONSTRUCTION -- #
+At this point, you can check the validity of your linux user **akelly**  configuration by issuing some icommands, and seeing files with the **ils** command.
 
-
-You first have to create the runtime environment for eclipse under the user identity (authority) of "irods".  
-
-This means that the user "irods" exists and has a sane user environment (i.e. all the prerequisite packages to run iRODS on your system have been installed, and that the "irodsServer" process is running.  See the links in the previous section).
-
-We're going to use a somewhat temporary folder "/home/irods-persistent" to house both the eclipse workspace, as well as the copy of the sources we're going to make, for the "irods" user:
+We are now ready to debug the /usr/bin/ireg command using eclipe, under the linux identity **akelly** (use your own developer linux id).
+ 
 
 ~~~
-$ sudo su
-<password>
-# cd ~akelly/src/renci
-# ls -l
+akelly@akelly1:~$ cd ~akelly/src/renci
+akelly@akelly1:~$ ls -l
 total 36
 drwxrwxr-x  9 akelly akelly 4096 Mar 11 13:21 ./
 drwxrwxr-x 15 akelly akelly 4096 Mar 10 16:34 ../
 drwxrwxr-x  8 akelly akelly 4096 Mar 12 15:23 bld_irods/
 drwxrwxr-x  5 akelly akelly 4096 Mar 12 15:27 bld_irods_client_icommands/
 drwxrwxr-x  4 akelly akelly 4096 Mar 10 22:01 How-To/
-drwxr-xr-x  4 akelly akelly 4096 Mar 10 16:34 How-To.bak/
 drwxrwxr-x 15 akelly akelly 4096 Mar 10 21:55 irods/
 drwxrwxr-x 10 akelly akelly 4096 Mar 10 22:06 irods_client_icommands/
 drwxrwxr-x  5 akelly akelly 4096 Mar 11 13:21 irods_training/
 ~~~
 
-The sources we want (for /usr/bin/ireg) are in the "irods\_client\_icommands/" folder.  Create the target folder if it doesn't exist already, and copy the sources there.
+The sources we want (for /usr/bin/ireg) are in the "irods\_client\_icommands/" folder.  
+
+Now, find the "ireg" executable, and start eclipse still as akelly:
 
 ~~~
-# mkdir -p /home/irods-persistent
-## --->  this is optional: ## rm -rf /home/irods-persistent/irods_client_icommands  
-# cp -r irods_client_icommands/ /home/irods-persistent 
-# chown -R irods:irods /home/irods-persistent
-~~~
-
-Now, become the user "irods", find the "ireg" executable, and start eclipse (from the command line). Still as superuser:
-
-~~~
-# su - irods
-irods@akellydt1:~$ pwd
-/var/lib/irods
-irods@akellydt1:~$ which ireg
+akelly@akelly1:~$ which ireg
 /usr/bin/ireg
-irods@akellydt1:~$ /opt/eclipse/eclipse   # Your installation folder might be different.
+akelly@akelly1:~$ /opt/eclipse/eclipse   # Your installation folder might be different.
 
 ~~~
 
