@@ -22,7 +22,7 @@ Before tackling this project, it is recommended that you start with the followin
 
 * Put together your **irods** development environment. See https://github.com/d-w-moore/irods-dev-orientation as a starting point. 
 
-* Go over this HOWTO: [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md) ). 
+* Go over this HOWTO: [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md). 
 
 Lastly, much of what happens next is how I work -- there are many ways to do things, and mine is not necessarily the best for you.  YMMV. 
 
@@ -49,7 +49,7 @@ akelly@akelly1: $
 
 So the linux user "akelly" now also has an iRODS user identity called "andrew", with a password (xx0000), and a regular "roduser" profile (run "iiadmin lu andrew" to see all possible types of users).
 
-(Ref: [https://docs.irods.org/master/icommands/user/#iinit](https://docs.irods.org/master/icommands/user/#iinit)
+(Ref: [https://docs.irods.org/master/icommands/user/#iinit](https://docs.irods.org/master/icommands/user/#iinit))
 
 Next, the Linux user **akelly** should run the **iinit** icommand to give iRODS some paramters about us:
 
