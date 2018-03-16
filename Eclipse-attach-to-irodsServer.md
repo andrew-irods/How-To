@@ -92,7 +92,7 @@ At this point, eclipse comes up -- the terminal you invoke it from is waiting fo
 
 The first thing that happens, is a dialog box that eclipse shows:
 
-![Workspace](images/debug-iserver-image1.png "Choose a workspace for the irods user") 
+![Workspace](images/debug-iserver-image1.png "Choose a workspace path") 
 
 Unless you have some reason to modify it, leave the workspace path as it is.
 
@@ -112,33 +112,35 @@ Choose "C/C++ Executable".  Click "Next".
 
 ![Choose Project](images/debug-iserver-image3.png "Type in /usr/sbin/irodsServer") 
 
-Type in "/usr/bin/ireg", and click "Next".
+Type in "/usr/sbin/irodsServer", and click "Next".
 
-![Choose Project](images/debug-icmds-image4.png "Enter project name and launch configuration") 
+![Choose Project](images/debug-iserver-image4.png "Enter project name and launch configuration") 
 
 In the dialog above, you can use the names eclipse sets up, or enter your own, then click "Finish".
 
-The next dialog pops up. This is where you can enter information about the runtime environment for the debugged executable, as well as where the sources are:
+The next dialog pops up. This is where you can enter where the sources are. Click on the "Source" tab:
 
-First we'll set up the runtime command line parameters.  Click on the "Arguments" tab:
+![Add source folder(s)](images/debug-iserver-image6.png "Enter sources' paths") 
 
-![Enter runtime program arguments](images/debug-icmds-image6.png "Enter runtime program arguments") 
+Click the arrow next to "C/C++ Attach to Application", and then and highlight Debug\_irodServer Configuration. Click the "Source" tab.  Then, click "Add...", pick "File System Directory" from the next dialog box, and finally type in or browse to the source directory for irods/.
 
-The information shown is imaginary of course.  Before we run the debugger for real, we will need to refer to an existing iRODS resource, an existing user directory or file, and a real target. Enter the information, and then click on the "Source" tab:
+Click "OK". 
 
-![Add source folder(s)](images/debug-icmds-image7.png "Enter sources' paths") 
+After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box.  (Do not click "Debug").
 
-Click and highlight Debug\_ireg.  Click "Add...", pick "File System Directory" from the next dialog box, and finally type in or browse to the source directory for irods_client_icommands.
+![Project Explorer file listing](images/debug-iserver-image8.png "Explorer File Listing") 
 
-Click "OK". After the two dialog boxes disappear, click on "Apply" and "Close" on the remaining dialog box.  (Do not click "Debug").
-
-![Project Explorer file listing](images/debug-icmds-image8.png "Explorer File Listing") 
-
-Click on the small arrow next to **ireg-[x86_64le]** in the Project Eplorer pane on the left.  This will expand and show the list of source files gathered in the previous step. Opening any one of these files (double-click, for example), will display the source file in the main center-right pane.
+Click on the small arrow next to **irodsServer -[x86_64le]** in the Project Eplorer pane on the left.  This will expand and show the list of source files gathered in the previous step. Opening any one of these files (double-click, for example), will display the source file in the main center-right pane.
 
 ### Start the debugger
 
-Right click on the **ireg-[x86_64le]** line in the project explorer, and choose "Debug As   ->", and then pick "Local C/C++ Application".  What opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
+Open the "Run" menu from the top title-bar. Choose "Debug Configurations..." (or, you can get the same thing by right clicking the **irodsServer-[x86_64le]** line in the project explorer, and choosing "Debug As   ->", and then picking "Debug Configurations..."):  
+
+![Create, Manage, and run configurations](images/debug-iserver-image9.png "Click the Debug button") 
+
+Click the small arrow next to "C/C++ Attach to Application" if that section is not open, and then highlight (click on) the "Debug_irodsServer Configuration" line. Click Debug button.
+
+What opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
 
 ![Switch Perspectives](images/debug-icmds-image11.png "Switch Perspectives: click Yes") 
 
