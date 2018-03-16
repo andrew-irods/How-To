@@ -4,21 +4,39 @@ Assuming a system with an installed iRODS build (and runtime system), this docum
 
 This operation will not build the irodsServer app at all, simply debug it. 
 
-The eclipse debugger will be run as the user **root**.  As such it will have access to all source files maintained by the developer, and most importantly, be able to attach to the running irodsServer process. 
+The eclipse debugger will be run as the user **akelly** in this document.  Please use your own linux user name, and enter paths that are appropriate to your system.
 
-**Important Note**:  
+### Important Note ###  
 
-sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope
+The linux system we mostly use for development (Ubuntu, currently it is mostly version 16.04) is installed with a restricted ability for **ptrace** to attach a debugger to a running process.  The security module is called **Yama**, and by default it runs in mode "1", which is a restrictive ability. This configuration will allow your debugger to start, run, or attach to **your** executable (running as a regular process with your linux user-id). In order to attach a debugger to a running server process (see documentation links below), this mode has to be changed to "0" in most cases. This is a run-time configuration set by modifying a file under **/proc**:
+
+~~~
+$ sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope
+~~~
+
+You can verify the configuration by running:
+
+~~~
+akelly@akellydt1:~$ sysctl kernel.yama.ptrace_scope
+kernel.yama.ptrace_scope = 0
+~~~
+
+A useful description of this facility can be found here:  
+
+[https://linux-audit.com/protect-ptrace-processes-kernel-yama-ptrace_scope/](https://linux-audit.com/protect-ptrace-processes-kernel-yama-ptrace_scope/)
+
+A definition of the facility can be found here: 
+
+[https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt) 
 
 
-
-https://docs.irods.org
 
 
 
 ### Assumptions & Caveats ###
 
 Before tackling this project, it is recommended that you start with the following if you're not familiar with eclipse:
+
 * Download and setup Eclipse. The version used in the making of this document is *Oxygen*, which bundles the C++ perspective, as well as other related plugins with it:
 
 ~~~
@@ -29,68 +47,53 @@ Before tackling this project, it is recommended that you start with the followin
 * Build a small, simple "hello world" application.  Do a google search of "eclipse tutorial", and you'll find dozens of tutorials and examples, including some pretty good video's on youtube.com.
 
 
-* Put together your **irods** development environment. See https://github.com/d-w-moore/irods-dev-orientation as a starting point. 
-
+* Put together your **irods** development environment. See [https://github.com/d-w-moore/irods-dev-orientation](https://github.com/d-w-moore/irods-dev-orientation) as a starting point. 
 
 * Go over this HOWTO: [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md). 
+
+* Go over this HOWTO: [How to Create an Eclipse project for /usr/bin/ireg](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-icommand-executable.md).
+
+* And the iRODS documentation: [https://docs.irods.org](https://docs.irods.org).
 
 Lastly, much of what happens next is how I work -- there are many ways to do things, and mine is not necessarily the best for you.  YMMV. 
 
 ### Preparations 
 
-Lets assume your developer user name is "akelly", and that your git repository sources are under the path "/home/akelly/src/renci/".  
+Lets assume your linux developer user name is "akelly", and that your git repository sources are under the path "/home/akelly/src/renci/".  
 
-You first have to create the runtime environment for eclipse under the user identity (authority) of "irods".  
+If you do not have one, create an iRODS identity to use from your linux user account.  (Mine is "andrew", used in the examples below).  See the iRODS documentation for how to create a user (with **iadmin**), and initialize the environment (with **iinit**).
 
-This means that the user "irods" exists and has a sane user environment (i.e. all the prerequisite packages to run iRODS on your system have been installed, and that the "irodsServer" process is running.  See the links in the previous section).
-
-We're going to use a somewhat temporary folder "/home/irods-persistent" to house both the eclipse workspace, as well as the copy of the sources we're going to make, for the "irods" user:
+Assuming you have successfully installed eclipse, successfully built the sources for **irodsServer** and installed the resulting **icommands** on your system, we are now ready to begin creating an Eclipse debug session which will attach to a running **irodsServer** process. 
 
 ~~~
-$ sudo su
-<password>
-# cd ~akelly/src/renci
-# ls -l
+akelly@akellydt1:~$ cd ~akelly/src/renci
+akelly@akellydt1:~$ ls -l
 total 36
 drwxrwxr-x  9 akelly akelly 4096 Mar 11 13:21 ./
 drwxrwxr-x 15 akelly akelly 4096 Mar 10 16:34 ../
 drwxrwxr-x  8 akelly akelly 4096 Mar 12 15:23 bld_irods/
 drwxrwxr-x  5 akelly akelly 4096 Mar 12 15:27 bld_irods_client_icommands/
 drwxrwxr-x  4 akelly akelly 4096 Mar 10 22:01 How-To/
-drwxr-xr-x  4 akelly akelly 4096 Mar 10 16:34 How-To.bak/
 drwxrwxr-x 15 akelly akelly 4096 Mar 10 21:55 irods/
 drwxrwxr-x 10 akelly akelly 4096 Mar 10 22:06 irods_client_icommands/
 drwxrwxr-x  5 akelly akelly 4096 Mar 11 13:21 irods_training/
 ~~~
 
-The sources we want (for /usr/bin/ireg) are in the "irods\_client\_icommands/" folder.  Create the target folder if it doesn't exist already, and copy the sources there.
+The sources we want (for /usr/sbin/irodsServer) are in the "irods/" folder. 
+
+Start eclipse:
 
 ~~~
-# mkdir -p /home/irods-persistent
-## --->  this is optional: ## rm -rf /home/irods-persistent/irods_client_icommands  
-# cp -r irods_client_icommands/ /home/irods-persistent 
-# chown -R irods:irods /home/irods-persistent
-~~~
-
-Now, become the user "irods", find the "ireg" executable, and start eclipse (from the command line). Still as superuser:
+akelly@akellydt1:~$ /opt/eclipse/eclipse   # Your installation folder might be different.
 
 ~~~
-# su - irods
-irods@akellydt1:~$ pwd
-/var/lib/irods
-irods@akellydt1:~$ which ireg
-/usr/bin/ireg
-irods@akellydt1:~$ /opt/eclipse/eclipse   # Your installation folder might be different.
-
-~~~
-
 At this point, eclipse comes up -- the terminal you invoke it from is waiting for it to exit, and you will see many messages from eclipse.  Those may safely be ignored.
 
 The first thing that happens, is a dialog box that eclipse shows:
 
 ![Workspace](images/debug-icmds-image1.png "Choose a workspace for the irods user") 
 
-It suggests to use "/var/lib/irods/eclipse-workspace" as the folder it should use for the workspace.  Override this by updating the path to "/home/irods-persistent/eclipse-workspace", and click "Launch".
+Unless you have some reason to modify it, leave the workspace path as it is.
 
 The next screen you see is the opening window.  I tend to dismiss that window forever, and go to the actual workbench:
 
