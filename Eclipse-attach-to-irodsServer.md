@@ -8,7 +8,7 @@ The eclipse debugger will be run as the user **akelly** in this document.  Pleas
 
 ### Important Note ###  
 
-The linux system we mostly use for development (Ubuntu, currently it is mostly version 16.04) is installed with a restricted ability for **ptrace** to attach a debugger to a running process.  The security module is called **Yama**, and by default it runs in mode "1", which is a restrictive ability. This configuration will allow your debugger to start, run, or attach to **your** executable (running as a regular process with your linux user-id). In order to attach a debugger to a running server process (see documentation links below), this mode has to be changed to "0" in most cases. This is a run-time configuration set by modifying a file under **/proc**. To get the current value of this kernel parameter, do this:
+The linux system we mostly use for development (Ubuntu, currently it is mostly version 16.04) is installed with a restricted ability for **ptrace** to attach a debugger to a running process.  The security module is called **Yama**, and by default it runs in mode "1", which is a restrictive ability. This configuration will allow your debugger to start, run, or attach to **your** executable (running as a regular process with your linux user-id). In order to attach a debugger to a running server process (see documentation links below), this mode has to be changed to "0" in most cases. This is a run-time kernel configuration parameter set by using **sysctl** as shown below (or by modifying a file under **/proc**). To get the current value of this kernel parameter, do this:
 
 ~~~
 $ sudo sysctl kernel.yama.ptrace_scope
