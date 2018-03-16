@@ -8,21 +8,24 @@ The eclipse debugger will be run as the user **akelly** in this document.  Pleas
 
 ### Important Note ###  
 
-The linux system we mostly use for development (Ubuntu, currently it is mostly version 16.04) is installed with a restricted ability for **ptrace** to attach a debugger to a running process.  The security module is called **Yama**, and by default it runs in mode "1", which is a restrictive ability. This configuration will allow your debugger to start, run, or attach to **your** executable (running as a regular process with your linux user-id). In order to attach a debugger to a running server process (see documentation links below), this mode has to be changed to "0" in most cases. This is a run-time configuration set by modifying a file under **/proc**:
+The linux system we mostly use for development (Ubuntu, currently it is mostly version 16.04) is installed with a restricted ability for **ptrace** to attach a debugger to a running process.  The security module is called **Yama**, and by default it runs in mode "1", which is a restrictive ability. This configuration will allow your debugger to start, run, or attach to **your** executable (running as a regular process with your linux user-id). In order to attach a debugger to a running server process (see documentation links below), this mode has to be changed to "0" in most cases. This is a run-time configuration set by modifying a file under **/proc**. To get the current value of this kernel parameter, do this:
 
 ~~~
-root@akellydt1:/home/akelly/src/renci/How-To/images# sysctl kernel.yama.ptrace_scope=0
+$ sudo sysctl kernel.yama.ptrace_scope
+kernel.yama.ptrace_scope = 1
+~~~
+
+If the value "1" is displayed, it should be changed to 0, thusly:
+
+~~~
+$ sudo sysctl kernel.yama.ptrace_scope=0
 kernel.yama.ptrace_scope = 0
-root@akellydt1:/home/akelly/src/renci/How-To/images# sysctl kernel.yama.ptrace_scope
-kernel.yama.ptrace_scope = 0
-
-$ sudo echo 0 > /proc/sys/kernel/yama/ptrace_scope
 ~~~
 
-You can verify the configuration by running:
+Then, to verify the change, do this:
 
 ~~~
-akelly@akellydt1:~$ sudo sysctl kernel.yama.ptrace_scope
+$ sudo sysctl kernel.yama.ptrace_scope
 kernel.yama.ptrace_scope = 0
 ~~~
 
@@ -33,9 +36,6 @@ A useful description of this facility can be found here:
 A definition of the facility can be found here: 
 
 [https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt) 
-
-
-
 
 
 ### Assumptions & Caveats ###
