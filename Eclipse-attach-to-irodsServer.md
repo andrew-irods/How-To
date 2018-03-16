@@ -151,29 +151,39 @@ Open the "Run" menu from the top title-bar. Choose "Debug As..." (or, you can ge
 
 There is more to be said about which specific irodsServer process you need to attach to. There are at least two, but there may be dozens.  The specific PID to attach to can be found in the irods logs, but we're not going to cover that here. 
 
-For the purpose of this exercise, click one of the irodsServer processes (say PID# 2421), and click "OK"
+For the purpose of this exercise, click one of the irodsServer processes (say PID# 2421), and click "OK".
 
-** Potential Error **
+**Potential Error**
 
-If for some reason the attempt by eclipse to attach to the process you chose, this would be the point at which it shows up.  For example: 
+If for some reason the attempt by eclipse to attach to the process you chose fails, this would be the point at which it shows up.  For example: 
 
 ![Problem Occurred](images/debug-iserver-image10-5.png "Error in final launch sequence") 
 
-This may be an irodsServer process which is in a bad state because of previous debug operations.  Restart the irods environment to fix the problem.
+This may be an irodsServer process which is in a bad state because of previous debug operations.  Restart the irods environment to fix the problem. Then, restart your debug session as described above.
  
-Or, this could be a manifestation of the ptrace failure described in the **Important Note** section outlined at the beginning of this document.  To recover, follow the process shown there, and restart your debug session. 
+Or, this could be a manifestation of the ptrace failure described in the **Important Note** section outlined at the beginning of this document.  To recover, follow the process shown there, and restart your debug session as described above. 
 
-** Next step **
+**Next step**
 
 After attaching to the running process, what opens up is this dialog, asking whether you want to switch from the C/C++ perspective to the Debug perspective.  Choose Yes (you might want to first click on the "Remember my decision" checkbox to avoid getting this dialog box again:
 
 ![Switch Perspectives](images/debug-iserver-image11.png "Switch Perspectives: click Yes") 
 
-What opens up is the Debug Perspective, with the program running, stopped at a breakpoint just inside the main() function:
+What opens up is the Debug Perspective, with irodsServer running, with all threads stopped:
 
-![Choose Project](images/debug-icmds-image12.png "Create an a new executable project") 
+![Suspended app](images/debug-icmds-image12.png "First debug view of suspended irodsServer") 
 
-So **ireg** the program is running, under our control.  We are stopped right at the beginning of the program, and shouldn't really continue much further, since the command line parameters entered into Eclipse, were quite imaginary. 
+You can see one of the suspended threads showing it's call stack, with the breakpoint typically at a select() call, waiting for network events.
+
+**It is probably important to just press the green arrow on the top bar to allow the server to continue running at this point, to prevent timeout issues from corrupting the state of the server.**
+
+However, we want to take another look at what's going on, so we'll stay paused so we can see the next screen:
+
+![Stack frame](images/debug-icmds-image13.png "Viewing source line for suspended irodsServer thread")
+
+Notice that we've gone down one frame in the stack trace (top left pane).  To do this, click on the line you want to view sources for. Since this (rodsServer.cpp line# 499) is the highest stack level for which we have sources, this is the one we pick. 
+
+The left pane opens up to that source file, at line 499, and we see that we are indeed at a select() system call, waiting for a network event. 
 
 The actual debugging of the program is beyond the scope of this document. 
 
