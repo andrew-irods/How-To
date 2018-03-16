@@ -35,7 +35,7 @@ Lets assume your developer user name is **akelly**, and that your git repository
 
 The first task is to get "akelly" set up as an iRODS user. In order to do that we need to establish akelly's **andrew** (iRODS) identity, and use the **iinit** command. 
 
-(Ref: The configuration section of the docs site online [https://docs.irods.org/4.1.2/manual/configuration/](https://docs.irods.org/4.1.2/manual/configuration/).
+(Ref: The configuration section of the docs site online [https://docs.irods.org/4.1.2/manual/configuration/](https://docs.irods.org/4.1.2/manual/configuration/)).
 
 Follow this process:
  
