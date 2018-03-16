@@ -32,7 +32,7 @@ Lets assume your developer user name is **akelly**, and that your git repository
 
 The first task is to get "akelly" set up as an iRODS user. In order to do that we need to establish akelly's **andrew** (iRODS) identity, and use the **iinit** command. 
 
-(Ref: The configuration section of the docs site online [https://docs.irods.org/4.1.2/manual/configuration/](https://docs.irods.org/4.1.2/manual/configuration/)).
+(Ref: The configuration section of the docs site online [https://docs.irods.org/master/system_overview/configuration/](https://docs.irods.org/master/system_overview/configuration/)).
 
 Follow this process:
  
@@ -49,7 +49,7 @@ akelly@akelly1: $
 
 So the linux user "akelly" now also has an iRODS user identity called "andrew", with a password (xx0000), and a regular "roduser" profile (run "iiadmin lu andrew" to see all possible types of users).
 
-(Ref: [https://docs.irods.org/4.1.2/icommands/user/#iinit](https://docs.irods.org/4.1.2/icommands/user/#iinit) )
+(Ref: [https://docs.irods.org/master/icommands/user/#iinit](https://docs.irods.org/master/icommands/user/#iinit)
 
 Next, the Linux user **akelly** should run the **iinit** icommand to give iRODS some paramters about us:
 
