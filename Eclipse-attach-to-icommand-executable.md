@@ -22,7 +22,7 @@ Before tackling this project, it is recommended that you start with the followin
 
 * Put together your **irods** development environment. See https://github.com/d-w-moore/irods-dev-orientation as a starting point. 
 
-* Go over this HOWTO: [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md). 
+* Go over this HOWTO: [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md) ). 
 
 Lastly, much of what happens next is how I work -- there are many ways to do things, and mine is not necessarily the best for you.  YMMV. 
 
