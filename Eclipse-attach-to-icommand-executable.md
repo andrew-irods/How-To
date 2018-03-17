@@ -47,7 +47,7 @@ irods@akelly1:~$ exit
 akelly@akelly1: $
 ~~~
 
-So the linux user "akelly" now also has an iRODS user identity called "andrew", with a password (xx0000), and a regular "roduser" profile (run "iiadmin lu andrew" to see all possible types of users).
+So the linux user "akelly" now also has an iRODS user identity called "andrew", with a password (xx0000), and a regular "roduser" profile (run "iadmin lu andrew" to see all possible types of users).
 
 (Ref: [https://docs.irods.org/master/icommands/user/#iinit](https://docs.irods.org/master/icommands/user/#iinit))
 
@@ -81,7 +81,7 @@ Of the responses given above:
 	
 **tempZone** -- Happens to be the default zone.
 	
-**xx0000** -- Is the password in iRODS for "andrew", as set up by the iiadmin command in the previous step.
+**xx0000** -- Is the password in iRODS for "andrew", as set up by the iadmin command in the previous step.
 
 At this point, you can check the validity of your linux user **akelly**  configuration by issuing some icommands, and seeing files with the **ils** command.
 
