@@ -124,7 +124,7 @@ Click on the small arrow next to "**hello-world-1 - [x86_64le]**" to show the li
 
 At this point, we can add more source files to the project by telling eclipse to look in additional source folders if needed.  Right-click on the project name in the expolorer pane, and click on the **"Debug As" -->  "Debug Configurations..."** submenus that pop up.
  
-A new dialog box opens (the same dialog box we saw above, but with the ability to make changes): 
+A new dialog box opens (the same dialog box we saw above): 
 
 ![Debug Configurations Again](images/hello-world-1-image6.png "Modify this configuration if needed") 
 
