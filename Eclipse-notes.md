@@ -80,4 +80,12 @@ Click the "Install" button for the plugin you want to install.  After installati
 
 Past that point, editing files with the ".md" extension in eclipse involve the plugin (check out the ctrl^shift^{ key sequence to split the screen into two panes, showing a markdown source tab, and the preview tab.
 
+**Markdown Viewer Extension for Chrome**
+
+![Chrome ExtenstionMenu](images/mdextension-chrome-image7.png "Get this from the Chrome \(Settings --> More tools --> Extensions\))
+
+
+
+
+
 
