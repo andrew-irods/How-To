@@ -2,7 +2,7 @@
 
 # How to Attach Eclipse to a Remote Running iRODS System
 
-This document demonstrates how to attach the Eclipse IDE to a running icommand and server on a remote system. 
+This document demonstrates how to attach the Eclipse IDE to an iRODS system (icommand client and server) on a remote system. 
 
 The local system (**akelly1** in this document) is the development system, and will includes a full set of iRODS sources (from github) that are built as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document).  Since both **akelly1** and **akellylt1** are Ubuntu 16.04 systems, the packages we focus on will be .deb files.  An equivalent process for Redhat derived systems (like CentOS, RHEL, etc) would involve .rpm packages.  We focus here on the .deb packages
 
