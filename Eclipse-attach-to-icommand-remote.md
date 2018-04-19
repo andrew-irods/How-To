@@ -24,7 +24,9 @@ Before tackling this project, it is recommended that you start with the followin
 
 [Building from source: A guide for developers who want to further work on iRODS](https://github.com/d-w-moore/irods-dev-orientation/blob/master/README.md "https://github.com/d-w-moore/irods-dev-orientation/blob/master/README.md")
 
-**Eclipse How-To's.**  In fact, we rely on the setup for the projects described below in order to start this project:
+**Eclipse How-To's.**  
+
+In fact, we rely on the setup for the projects described below in order to start this project:
 
 [Eclipse Odds and Ends](https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md")
 
