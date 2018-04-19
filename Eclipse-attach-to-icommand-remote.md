@@ -1,6 +1,6 @@
 ### THIS PAGE IS UNDER CONSTRUCTION -- PLEASE IGNORE FOR NOW ###
 
-# How to Attach Eclipse to a Remote Running iRODS System
+# How to Attach Eclipse to a Remote Running iRODS System #
 
 This document demonstrates how to attach the Eclipse IDE to an iRODS system (icommand client and server) on a remote system. 
 
@@ -62,12 +62,24 @@ Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
 This document assumes sufficient familiarity with Eclipse so that long winded descriptions with screen-shots showing where menus are and how to invoke them are not included.  To find a specific option or menu, examine the referenced How-To's listed above (they are long winded with screen-shots).
 
 
-
-
-
-
-
 ### Create an Eclipse Executable Project ###
+
+Once we have built your irods server and icommands, we should have two directories, one for each:
+
+(These could be any directory path names):
+
+**..../github/irods** - the directory where the irods server sources were installed and built (from [iRODS on Github](https://github.com/irods/irods "https://github.com/irods/irods")).
+
+**..../github/irods\_client\_icommands** - the directory where the irods icommand sources were installed and built (from [iRODS Client iCommands on Github](https://github.com/irods/irods_client_icommands "https://github.com/irods/irods_client_icommands")). 
+
+
+
+
+
+
+
+
+
 
 Thus far we have not used eclipse for anything.  We're going to now create an eclipse project which revolves around the executable above (./hello-world-1).   
 
