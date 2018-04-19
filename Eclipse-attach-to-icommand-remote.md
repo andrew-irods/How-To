@@ -36,7 +36,7 @@ Before tackling this project, it is recommended that you start with the followin
 
 [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
 
-[Youtube video:  GDB Remote Debugging using LUbuntu Linux and Eclipse CDT Neon 3](https://www.youtube.com/watch?v=KbN1UyybsV4 "https://www.youtube.com/watch?v=KbN1UyybsV4")
+[Youtube video:  GDB Remote Debugging using LUbuntu Linux and Eclipse CDT Neon 3](https://www.youtube.com/watch?v=KbN1UyybsV4 "https://www.youtube.com/watch?v=KbN1UyybsV4 target=_blank")
 
 
 ### Versions ###
