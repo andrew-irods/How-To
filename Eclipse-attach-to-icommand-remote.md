@@ -2,7 +2,19 @@
 
 # How to Attach Eclipse to a Remote Running iRODS System
 
-This document demonstrates how to attach the Eclipse IDE to a running icommand and server on a remote system. We will first create an eclipse project that targets an existing linux executable, and create a debug launch configuration which attaches the project to a running executable.
+This document demonstrates how to attach the Eclipse IDE to a running icommand and server on a remote system. 
+
+The local system (**akellydt1** in this document) will include a full set of sources (from github) that are built in two ways: One, as an in-place build to provide us with local executables.  The other as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document - with an 'el' instead of the 'd' in the name akellylt1).  More on this below.
+
+The connection to the remote system will be based on **ssh**.  I use ssh keys to avoid being challenged for a password.  YMMV.
+
+
+
+
+
+
+
+We will first create an eclipse project that targets an existing linux executable, and create a debug launch configuration which attaches the project to a running executable.
 
 
 ### The Thing with Eclipse ###
@@ -16,21 +28,31 @@ Before tackling this project, it is recommended that you start with the followin
 
 [Eclipse Odds and Ends](https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md")
 
-[How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
-
 [How to Create an Eclipse project for /usr/bin/ireg](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-icommand-executable.md)
 
 [How to Attach Eclipse to a Running irodsServer Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-irodsServer.md)
 
+**Also, this won't hurt:**
+
+[How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
+
+### Versions ###
+
 The eclipse version used here is:
 
 ~~~
-		Eclipse IDE for C/C++ Developers
-		Version: Oxygen.2 Release (4.7.2)
+Eclipse IDE for C/C++ Developers
+Version: Oxygen.3 Release (4.7.3RC3)
 ~~~
 
+Running with Oracle Java 9:
 
-So we're now ready to start working with the executable (./hello-world-1):
+~~~
+$ java --version
+java 9.0.4
+Java(TM) SE Runtime Environment (build 9.0.4+11)
+Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
+~~~
 
 ### Create an Eclipse Executable Project ###
 
