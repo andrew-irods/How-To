@@ -22,7 +22,7 @@ Before tackling this project, it is recommended that you start with the followin
 
 [Installing and running irods](https://docs.irods.org/master/getting_started/installation/ "https://docs.irods.org/master/getting_started/installation/")
 
-
+[Building from source: A guide for developers who want to further work on iRODS](https://github.com/d-w-moore/irods-dev-orientation/blob/master/README.md "https://github.com/d-w-moore/irods-dev-orientation/blob/master/README.md")
 
 
 How-To's.  In fact, we rely on the setup for the projects described below in order to start this project:
