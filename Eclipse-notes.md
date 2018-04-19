@@ -82,10 +82,4 @@ Past that point, editing files with the ".md" extension in eclipse involve the p
 
 **Markdown Viewer Extension for Chrome**
 
-![Chrome ExtenstionMenu](images/mdextension-chrome-image7.png "Get this from the Chrome \(Settings --> More tools --> Extensions\))
-
-
-
-
-
-
+[Chrome Extenstion Menu](images/mdextension-chrome-image7.png "Get this from the Chrome \(Settings --> More tools --> Extensions\) )
