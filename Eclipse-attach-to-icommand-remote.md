@@ -20,11 +20,11 @@ Eclipse has many features, configuration options, plugins, and supports differen
 
 Before tackling this project, it is recommended that you start with the following knowledge base:
 
-[Installing and running irods](https://docs.irods.org/master/getting_started/installation/ "https://docs.irods.org/master/getting_started/installation/")
+[Installing and running iRODS](https://docs.irods.org/master/getting_started/installation/ "https://docs.irods.org/master/getting_started/installation/")
 
 [Building from source: A guide for developers who want to further work on iRODS](https://github.com/d-w-moore/irods-dev-orientation/blob/master/README.md "https://github.com/d-w-moore/irods-dev-orientation/blob/master/README.md")
 
-**How-To's.**  In fact, we rely on the setup for the projects described below in order to start this project:
+**Eclipse How-To's.**  In fact, we rely on the setup for the projects described below in order to start this project:
 
 [Eclipse Odds and Ends](https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md")
 
@@ -35,6 +35,9 @@ Before tackling this project, it is recommended that you start with the followin
 **Also, this won't hurt:**
 
 [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
+
+[Youtube video:  GDB Remote Debugging using LUbuntu Linux and Eclipse CDT Neon 3](https://www.youtube.com/watch?v=KbN1UyybsV4 "https://www.youtube.com/watch?v=KbN1UyybsV4")
+
 
 ### Versions ###
 
