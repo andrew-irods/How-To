@@ -16,7 +16,7 @@ Following the process in this document, we will create an eclipse project that t
 Eclipse has many features, configuration options, plugins, and supports different platforms and languages. Not all of them work quite as advertised, and it's easy to get lost. It also has many flavors based on the language perspective chosen. The point is (in my opinion), load up on patience.  
 
 
-### Assumptions, Caveats and References###
+### Assumptions, Caveats and References ###
 
 Before tackling this project, it is recommended that you start with the following knowledge base:
 
