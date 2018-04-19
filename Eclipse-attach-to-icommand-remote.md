@@ -4,11 +4,11 @@
 
 This document demonstrates how to attach the Eclipse IDE to an iRODS system (icommand client and server) on a remote system. 
 
-The local system (**akelly1** in this document) is the development system, and will includes a full set of iRODS sources (from github) that are built as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document).  Since both **akelly1** and **akellylt1** are Ubuntu 16.04 systems, the packages we focus on will be .deb files.  An equivalent process for Redhat derived systems (like CentOS, RHEL, etc) would involve .rpm packages.  We focus here on the .deb packages
+The local system (**akelly1** in this document) is the development system, and includes a full set of iRODS sources (from github) that are built as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document).  Since both **akelly1** and **akellylt1** are Ubuntu 16.04 systems, the packages we focus on will be .deb files.  An equivalent process for Redhat derived systems (like CentOS, RHEL, etc) would involve .rpm packages.
 
-The connection to the remote system will be based on **ssh**.  It is recommended to install ssh keys to avoid being challenged for a password.  YMMV.
+The connection to the remote system will be based on **ssh**.  It is recommended that ssh keys be installed to avoid being challenged for a password on every connection.  YMMV.
 
-In this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on a remote system.  We will then create a separate project for the **irodsServer** process as an executable, and then create a remote debug configuration that will allow us to attach eclipse to the remote running **irodsServer** which interacts with our **iput** utility.
+Following the process in this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on a remote system.  We will then create a separate project for the **irodsServer** process as an executable, and then create a remote debug configuration that will allow us to attach eclipse to the remote running **irodsServer** which interacts with our **iput** utility.  None of these Eclipse configurations allows building the actual sources - that's not the intent.  They're used for the purpose of allowing the debugger access to the sources as programs are being debugged.
 
 
 ### The Thing with Eclipse ###
@@ -20,7 +20,7 @@ Eclipse has many features, configuration options, plugins, and supports differen
 
 Before tackling this project, it is recommended that you start with the following knowledge base:
 
-Installing and running 
+[Installing and running irods](https://docs.irods.org/master/getting_started/installation/ "https://docs.irods.org/master/getting_started/installation/")
 
 
 
