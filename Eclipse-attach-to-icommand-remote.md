@@ -4,17 +4,11 @@
 
 This document demonstrates how to attach the Eclipse IDE to a running icommand and server on a remote system. 
 
-The local system (**akellydt1** in this document) will include a full set of sources (from github) that are built in two ways: One, as an in-place build to provide us with local executables.  The other as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document - with an 'el' instead of the 'd' in the name akellylt1).  More on this below.
+The local system (**akelly1** in this document) is the development system, and will includes a full set of iRODS sources (from github) that are built as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document).  Since both **akelly1** and **akellylt1** are Ubuntu 16.04 systems, the packages we focus on will be .deb files.  An equivalent process for Redhat derived systems (like CentOS, RHEL, etc) would involve .rpm packages.  We focus here on the .deb packages
 
-The connection to the remote system will be based on **ssh**.  I use ssh keys to avoid being challenged for a password.  YMMV.
+The connection to the remote system will be based on **ssh**.  It is recommended to install ssh keys to avoid being challenged for a password.  YMMV.
 
-
-
-
-
-
-
-We will first create an eclipse project that targets an existing linux executable, and create a debug launch configuration which attaches the project to a running executable.
+In this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on a remote system.  We will then create a separate project for the **irodsServer** process as an executable, and then create a remote debug configuration that will allow us to attach eclipse to the remote running **irodsServer** which interacts with our **iput** utility.
 
 
 ### The Thing with Eclipse ###
@@ -24,7 +18,14 @@ Eclipse has many features, configuration options, plugins, and supports differen
 
 ### Assumptions & Caveats ###
 
-Before tackling this project, it is recommended that you start with the following How-To's.  In fact, we rely on the setup for the projects described below in order to start this project:
+Before tackling this project, it is recommended that you start with the following knowledge base:
+
+Installing and running 
+
+
+
+
+How-To's.  In fact, we rely on the setup for the projects described below in order to start this project:
 
 [Eclipse Odds and Ends](https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-notes.md")
 
