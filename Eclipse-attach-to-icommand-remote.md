@@ -34,7 +34,7 @@ In fact, we rely on the setup for the projects described below in order to start
 
 [How to Attach Eclipse to a Running irodsServer Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-irodsServer.md)
 
-**Also, this won't hurt:**
+**Also, these won't hurt:**
 
 [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
 
@@ -62,15 +62,105 @@ Java HotSpot(TM) 64-Bit Server VM (build 9.0.4+11, mixed mode)
 This document assumes sufficient familiarity with Eclipse so that long winded descriptions with screen-shots showing where menus are and how to invoke them are not included.  To find a specific option or menu, examine the referenced How-To's listed above (they are long winded with screen-shots).
 
 
-### Create an Eclipse Executable Project ###
+### Build and copy all iRODS .deb files to remote system ###
 
-Once we have built your irods server and icommands, we should have two directories, one for each:
+Once we have built the irods server and icommands, we should have two directories, one for each, as well as the corresponding build directories with the results of each build:
 
 (These could be any directory path names):
 
-**..../github/irods** - the directory where the irods server sources were installed and built (from [iRODS on Github](https://github.com/irods/irods "https://github.com/irods/irods")).
+**..../github/irods** - the directory where the irods server sources were installed (from [iRODS on Github](https://github.com/irods/irods "https://github.com/irods/irods")).
 
-**..../github/irods\_client\_icommands** - the directory where the irods icommand sources were installed and built (from [iRODS Client iCommands on Github](https://github.com/irods/irods_client_icommands "https://github.com/irods/irods_client_icommands")). 
+**..../github/bld_irods** - the directory where the artifacts from the build of the irods server reside.
+
+**..../github/irods\_client\_icommands** - the directory where the irods icommand sources were installed (from [iRODS Client iCommands on Github](https://github.com/irods/irods_client_icommands "https://github.com/irods/irods_client_icommands")). 
+
+**..../github/bld_icmds** - the directory where the artifacts from the build of the irods icommands reside. 
+
+Also, there is an expectation here that the remote system (**akellylt1** in this case) has been installed with the standard iRODS packages in a regular configuration.  This includes an iRODS administration user called **irods** which exists on that system with the home directory of **/var/lib/irods** (typically with an unknown password); binaries installed under **/usr/bin**, **/usr/sbin**, **/var/lib/irods/**, etc. 
+
+In preparation of the coming debug session, the target system **akellylt1** should be accessed, a password for the **irods** user added, and ssh keys installed under **~/.ssh/**.
+
+**Note:** There are other ways to do this (for example, logging in as another user who has iRODS admin authority, but for this project we're simply following this process.
+
+For example, access the remote irods system:
+
+~~~
+$ ssh andrew@akellylt1               # andrew is a regular linux user with "**sudo**" privileges
+$ sudo su
+<password>
+# passwd irods
+<negotiate the new irods password>
+# su - irods
+$ pwd
+/var/lib/irods
+$ ./irodsctl status
+irodsServer :
+  Process 1431
+  Process 1432
+irodsReServer :
+  Process 1434
+$ 
+~~~
+
+As you can see above, you are logged in as the user **irods**, with the current working directory set at **/var/lib/irods**, and you can proceed with entering ssh keys on both the target system, as well as on your own development system if you wish.
+
+Log out from the remote iRODS system (**akellylt1**) and back to your development system at the directory where iRODS was built from source.  (Of course, you can keep the remote ssh session open, and simply use another window for the local development system):
+
+On the local development system (**akelly1**):
+
+~~~
+$ uname -n
+akelly1               # This is our development system
+$ cd ~/github         # Enter your own base path for the source/build directory
+$ ls -l
+drwxrwxr-x  5 akelly akelly 4096 Apr 17 10:29 bld_icmds
+drwxrwxr-x  8 akelly akelly 4096 Apr 17 10:29 bld_irods
+drwxrwxr-x 15 akelly akelly 4096 Apr 14 06:25 irods
+drwxrwxr-x 10 akelly akelly 4096 Apr  8 10:39 irods_client_icommands
+. . . 
+  
+~~~
+Of course there would be other files and/or directories there in most cases.
+
+Finally, copy and transfer the .deb files from under the two bld_ directories, to the remote iRODS system:
+
+~~~
+$ uname -n
+akelly1
+$ cd ~/github
+$ ls -l bld_icmds/*.deb bld_irods/*.deb
+-rw-rw-r-- 1 akelly akelly  3152538 Apr 17 10:29 bld_icmds/irods-icommands_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly  2657322 Apr 17 10:29 bld_irods/irods-database-plugin-mysql_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly  2656750 Apr 17 10:29 bld_irods/irods-database-plugin-oracle_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly  2685302 Apr 17 10:29 bld_irods/irods-database-plugin-postgres_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly 10481568 Apr 17 10:29 bld_irods/irods-dev_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly 48034298 Apr 17 10:29 bld_irods/irods-runtime_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly 19888640 Apr 17 10:29 bld_irods/irods-server_4.2.3~xenial_amd64.deb
+$ mkdir packages
+$ cp bld_icmds/*.deb bld_irods/*postgres*.deb bld_irods/irods-{dev,runtime,server}*.deb packages
+$  
+~~~
+
+Notice that we did not copy the packages destined for oracle or mysql based systems -- we are using postgres on the remote system **akellylt1**. Now, lets copy the files to the remote system:
+
+~~~
+$ ls -l packages
+-rw-rw-r-- 1 akelly akelly  2685302 Apr 19 19:25 irods-database-plugin-postgres_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly 10481568 Apr 19 19:25 irods-dev_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly  3152538 Apr 19 19:25 irods-icommands_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly 48034298 Apr 19 19:25 irods-runtime_4.2.3~xenial_amd64.deb
+-rw-rw-r-- 1 akelly akelly 19888640 Apr 19 19:25 irods-server_4.2.3~xenial_amd64.deb
+$
+$ scp -r packages irods@172.20.0.104:/tmp           # Enter the correct name/ip-address for your system 
+irods-icommands_4.2.3~xenial_amd64.deb                                    100% 3079KB   3.0MB/s   00:00    
+irods-database-plugin-postgres_4.2.3~xenial_amd64.deb                     100% 2622KB   2.6MB/s   00:00    
+irods-dev_4.2.3~xenial_amd64.deb                                          100%   10MB  10.0MB/s   00:00    
+irods-server_4.2.3~xenial_amd64.deb                                       100%   19MB  19.0MB/s   00:01    
+irods-runtime_4.2.3~xenial_amd64.deb                                      100%   46MB  45.8MB/s   00:00    
+$
+~~~
+
+You will be challenged for a password if you did not install ssh keys on the remote system.  This operation will place a new directory **/tmp/packages** on the remote system with the .deb files created from the builds of the irods server and icommands.
 
 
 
@@ -79,6 +169,7 @@ Once we have built your irods server and icommands, we should have two directori
 
 
 
+### Create an Eclipse Executable Project ###
 
 
 Thus far we have not used eclipse for anything.  We're going to now create an eclipse project which revolves around the executable above (./hello-world-1).   
