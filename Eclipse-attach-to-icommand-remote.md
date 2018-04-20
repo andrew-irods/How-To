@@ -109,8 +109,15 @@ As you can see above, you are logged in as the user **irods**, with the current 
 This is a good point in the process to adjust the Yama linux security module ptrace scope variable (ref. [https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt)).  While you are still superuser on the target system, do this:
 
 ~~~
+$ uname -n                         $ This is our remote system
+akellylt1
+$ whoami
+$ irods
+$ exit                             $ Go back to being superuser
+#
 # sysctl kernel.yama.ptrace_scope
 kernel.yama.ptrace_scope = 1
+#
 ~~~
 
 If the value displayed is "0", that is the current value of the ptrace_scope variable in the kernel, and you don't have to do anything else.  If it is any other value, do this:
@@ -118,6 +125,11 @@ If the value displayed is "0", that is the current value of the ptrace_scope var
 ~~~
 # sysctl kernel.yama.ptrace_scope=0
 kernel.yama.ptrace_scope = 0
+#
+# exit
+$ whoami
+andrew
+$
 ~~~
 
 This will allow the debugging session (local or remote) to attach gdb and eclipse to a running server process that's not owned by user in question.  You might have to do this again after the next time the remote system is rebooted. 
