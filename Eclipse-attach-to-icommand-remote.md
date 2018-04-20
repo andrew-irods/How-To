@@ -109,11 +109,11 @@ As you can see above, you are logged in as the user **irods**, with the current 
 This is a good point in the process to adjust the Yama linux security module ptrace scope variable (ref. [https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt)).  While you are still superuser on the target system, do this:
 
 ~~~
-$ uname -n                         $ This is our remote system
+$ uname -n                          $ This is our remote system
 akellylt1
 $ whoami
 $ irods
-$ exit                             $ Go back to being superuser
+$ exit                              $ Go back to being superuser
 #
 # sysctl kernel.yama.ptrace_scope
 kernel.yama.ptrace_scope = 1
@@ -132,7 +132,7 @@ andrew
 $
 ~~~
 
-This will allow the debugging session (local or remote) to attach gdb and eclipse to a running server process that's not owned by user in question.  You might have to do this again after the next time the remote system is rebooted. 
+This will allow the debugging session (local or remote) to attach gdb and eclipse to the running server process that's detached.  You might have to do this again after the next time the remote system is rebooted. 
 
 Log out from the remote iRODS system (**akellylt1**) and back to your development system at the directory where iRODS was built from source. Of course, you can keep the remote ssh session open, and simply use another window for the local development system -- this might be a good idea, since we still have to install the .deb packages that will be transferred over from the development system:
 
