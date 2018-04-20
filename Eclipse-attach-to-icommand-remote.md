@@ -85,7 +85,9 @@ In preparation of the coming debug session, the target system **akellylt1** shou
 For example, access the remote irods system:
 
 ~~~
-$ ssh andrew@akellylt1               # andrew is a regular linux user with "**sudo**" privileges
+$ ssh andrew@akellylt1             # andrew is a regular linux user with "**sudo**" privileges
+# uname -n                         # This is our remote system
+akellylt1
 $ sudo su
 <password>
 # passwd irods
@@ -104,13 +106,29 @@ $
 
 As you can see above, you are logged in as the user **irods**, with the current working directory set at **/var/lib/irods**, and you can proceed with entering ssh keys on both the target system, as well as on your own development system if you wish.
 
-Log out from the remote iRODS system (**akellylt1**) and back to your development system at the directory where iRODS was built from source.  (Of course, you can keep the remote ssh session open, and simply use another window for the local development system):
+This is a good point in the process to adjust the Yama linux security module ptrace scope variable (ref. [https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt)).  While you are still superuser on the target system, do this:
+
+~~~
+# sysctl kernel.yama.ptrace_scope
+kernel.yama.ptrace_scope = 1
+~~~
+
+If the value displayed is "0", that is the current value of the ptrace_scope variable in the kernel, and you don't have to do anything else.  If it is any other value, do this:
+
+~~~
+# sysctl kernel.yama.ptrace_scope=0
+kernel.yama.ptrace_scope = 0
+~~~
+
+This will allow the debugging session (local or remote) to attach gdb and eclipse to a running server process that's not owned by user in question.  You might have to do this again after the next time the remote system is rebooted. 
+
+Log out from the remote iRODS system (**akellylt1**) and back to your development system at the directory where iRODS was built from source. Of course, you can keep the remote ssh session open, and simply use another window for the local development system -- this might be a good idea, since we still have to install the .deb packages that will be transferred over from the development system:
 
 On the local development system (**akelly1**):
 
 ~~~
-$ uname -n
-akelly1               # This is our development system
+$ uname -n            # This is our development system
+akelly1
 $ cd ~/github         # Enter your own base path for the source/build directory
 $ ls -l
 drwxrwxr-x  5 akelly akelly 4096 Apr 17 10:29 bld_icmds
@@ -125,7 +143,7 @@ Of course there would be other files and/or directories there in most cases.
 Finally, copy and transfer the .deb files from under the two bld_ directories, to the remote iRODS system:
 
 ~~~
-$ uname -n
+$ uname -n            # This is our development system
 akelly1
 $ cd ~/github
 $ ls -l bld_icmds/*.deb bld_irods/*.deb
@@ -163,16 +181,118 @@ $
 You will be challenged for a password if you did not install ssh keys on the remote system.  This operation will place a new directory **/tmp/packages** on the remote system with the .deb files created from the builds of the irods server and icommands.
 
 
+### Install the iRODS .deb files on the remote system ###
 
+Back on the remote system, become superuser.  You cannot do this as the user **irods** with the **sudo** command, because as installed from packages, this user does not have **sudoer** priviliges.  
 
+In my case, I log in as **andrew** (who does have **sudoer** priviliges) on the remote system, and run the following commands as superuser:
 
+~~~
+$ uname -n                     # This is our remote system
+akellylt1
+$ whoami
+andrew
+$
+$ # First, stop the irods servers:
+$
+$ sudo su - irods -c "./irodsctl stop"
+Stopping iRODS server...
+Success
+$
+$ # Now, install the packages transfered to /tmp/packages, all in one command line:
+$
+$ sudo dpkg -i /tmp/packages/*.deb
+(Reading database ... 267288 files and directories currently installed.)
+Preparing to unpack .../irods-database-plugin-postgres_4.2.3~xenial_amd64.deb ...
+Unpacking irods-database-plugin-postgres (4.2.3) over (4.2.3) ...
+Preparing to unpack .../irods-dev_4.2.3~xenial_amd64.deb ...
+Unpacking irods-dev (4.2.3) over (4.2.3) ...
+Preparing to unpack .../irods-icommands_4.2.3~xenial_amd64.deb ...
+Unpacking irods-icommands (4.2.3) over (4.2.3) ...
+Preparing to unpack .../irods-runtime_4.2.3~xenial_amd64.deb ...
+Unpacking irods-runtime (4.2.3) over (4.2.3) ...
+Preparing to unpack .../irods-server_4.2.3~xenial_amd64.deb ...
+No iRODS servers running.
+Upgrading Existing iRODS Installation
+Unpacking irods-server (4.2.3) over (4.2.3) ...
+Setting up irods-dev (4.2.3) ...
+Setting up irods-runtime (4.2.3) ...
+Setting up irods-icommands (4.2.3) ...
+Setting up irods-server (4.2.3) ...
+Setting up irods-database-plugin-postgres (4.2.3) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for systemd (229-4ubuntu21.1) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+ureadahead will be reprofiled on next reboot
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+$
+$ # Restart the irods servers:
+$
+$ sudo su - irods -c "./irodsctl start"
+Updating /var/lib/irods/VERSION.json...
+Validating [/var/lib/irods/.irods/irods_environment.json]... Success
+Validating [/var/lib/irods/VERSION.json]... Success
+Validating [/etc/irods/server_config.json]... Success
+Validating [/etc/irods/host_access_control_config.json]... Success
+Validating [/etc/irods/hosts_config.json]... Success
+Ensuring catalog schema is up-to-date...
+Catalog schema is up-to-date.
+Starting iRODS server...
+Success
+$
+~~~
 
+It is important that the "dpkg -i " command executed above be done all in one command line (this allows dpkg to resolve dependencies appropriately).  
+
+Still on the remote system, prepare a small file that can be used as a parameter to the **iput** command in the upcoming eclipse session on the development system.
+
+~~~
+$ uname -n                     # This is our remote system
+akellylt1
+$ whoami
+andrew
+$ sudo su - irods
+[sudo] password for andrew: 
+<enter password>
+$ whoami
+$ irods
+$ date > /tmp/testfile1
+$ cat /tmp/testfile1
+Fri Apr 20 03:07:56 EDT 2018
+$ iput /tmp/testfile1
+$ ils -l 
+/tempZone/home/rods:
+  rods              0 demoResc           29 2018-04-20.03:10 & testfile1
+$
+$ # and remove it from irods...
+$
+$ irm testfile1
+$ ils -l
+/tempZone/home/rods:
+$
+~~~
+
+This small segment above assures us that the irods installation worked fine, and also this is the very same command we will execute remotely from eclipse on the development system.  If it worked here, it should also work there, all things being equal.
 
 
 ### Create an Eclipse Executable Project ###
 
+Everything is now ready on the remote system for our eclipse session. Start eclipse:
 
-Thus far we have not used eclipse for anything.  We're going to now create an eclipse project which revolves around the executable above (./hello-world-1).   
+~~~
+$ uname -n
+akelly1
+$ /opt/eclipse/eclipse       # Enter your own path to the eclipse executable
+. . .
+~~~
+
+
+
+
+
+
+
+
 
 From the eclipse File menu, pick the "import..." option  (**File --> Import...**). 
 A new dialog box opens: 
