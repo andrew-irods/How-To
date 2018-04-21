@@ -8,7 +8,7 @@ The local system (**akelly1** in this document) is the development system, and i
 
 The connection to the remote system will be based on **ssh**.  It is recommended that ssh keys be installed to avoid being challenged for a password on every connection.  YMMV.
 
-Following the process in this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on a remote system.  We will then create a separate project for the **irodsServer** process as an executable, and then create a remote debug configuration that will allow us to attach eclipse to the remote running **irodsServer** which interacts with our **iput** utility.  None of these Eclipse configurations allows building the actual sources - that's not the intent.  They're used for the purpose of allowing the debugger access to the sources as programs are being debugged.
+Following the process in this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on a remote system.  We will then create a separate project for the **irodsServer** process as an executable, and then create a remote debug configuration that will allow us to attach eclipse to the remote running **irodsServer** which interacts with our **iput** utility.  None of these Eclipse configurations allow building the actual sources - that's not the intent.  They're used for the purpose of allowing the debugger access to the sources as programs are being debugged.
 
 
 ### The Thing with Eclipse ###
@@ -287,7 +287,7 @@ $
 This small segment above assures us that the irods installation worked fine, and also this is the very same command we will execute remotely from eclipse on the development system.  If it worked here, it should also work there, all things being equal.
 
 
-### Create an Eclipse Executable Project on the Development System ###
+### Create an Eclipse Executable Project for IPUT on the Development System ###
 
 Everything is now ready on the remote system for our eclipse session. Start eclipse:
 
@@ -317,7 +317,7 @@ Name: IPUT_remote_debug
 (click Finish)
 ~~~
 
-The dialog box for "Create, Manage, and run configurations" opens, and in the left pane, IPUT_remote_debug should be highlighted.
+The dialog box for **Create, manage, and run configurations** opens, and in the left pane, IPUT_remote_debug should be highlighted.
 
 In the right pane, in the "Arguments" tab, enter: **/tmp/testfile1**
 
@@ -333,7 +333,7 @@ and again:
 Click Add... --> File System Directory --> and enter the full pathname for $work/irods
 ~~~
 
-Click **Apply** on the **Create, Manage, and run configurations** dialog box, and then click "Close".
+Click **Apply** on the **Create, manage, and run configurations** dialog box, and then click "Close".
 
 Then, in the left (Project Explorer" pane of eclipse: 
 
@@ -463,7 +463,7 @@ irods@akellylt1:~$
 And that's that: mission accomplished.  Switch back from the **Debug Perspective** to the **C/C++** perspective by clicking on the button at the top right hand side of the eclipse main window.
 
 
-## Create an Eclipse Executable Project on the Development System ##
+## Create an Eclipse Executable Project irodsServer on the Development System ##
 
 
 
