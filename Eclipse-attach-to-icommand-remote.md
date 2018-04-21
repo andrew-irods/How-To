@@ -352,22 +352,118 @@ Make sure that the "Search for nested projects" checkbox is checked, as well as 
 Click **"Finish".**
 
 
+### Set Up an SSH Connection from Eclipse to the Target Remote System ###
+
+First, we establish the remote connection to the target system.  This configuration will remain beyond the lifetime of a single session. Click:
+
+~~~
+Window --> Show View --> Other 
+~~~
+
+In the dialog box that opens, enter **remote** into the filter field, in order to find **Remote Systems**.
+
+Click it once you find it.  This will open the "Remote Systems" tab in the bottom pane of the eclipse main window.
+
+Right-click over any white space in that pane, and click:
+
+~~~
+New --> Connection...
+~~~
+
+Pick **Linux**, and click **Next>**
+
+In "Host name:", enter the name or ip address of the remote iRODS system (**172.20.0.104** in our case).
+
+In the "New Connection" dialog that opens:
+
+Check **ssh.files** and click **Next>**
+
+In the next dialog, check the **processes.shell.linux** checkbox and click **Next>**
+
+In the next dialog, check the **ssh.shells** checkbox and click **Finish**.
+
+Your new connection will now appear in the bottom pane.  Click on the small arrow next to the remote system's name, and you can choose between various views of the remote system.  
+
+Adjustments can be made to the system and/or ssh properties if they need adjustment: 
+
+Right-click on the system name (or ip address), and then choose **Properties** to make adjustments to the target system's connection information.  For example, you can enter the user's name for the target system (highlight the **Host** line on the left pane of the **Properties** dialog box).
+
+Or, you can right-click on the **Sftp Files** item below the system name, and choose **Properties** to make adjustments to the sftp connection information for the target system.  Pick **Subsystem** on the left pane of the **Properties** dialog box in order to change the port number for the connection.
+
+Click on the small arrow next to **Sftp Files**, and you can click through to the directory structure on the remote system.  You may be challenged for a password at this point.
 
 
+### Set Up the Eclipse Debug Configuration for the Remote Debuggin of iput ###
+
+In the left vertical pane of Eclipe (**Project Explorer**):
+
+~~~
+Right-click the project name: IPUT_remote_debug  -->  Debug As>  -->  Debug Configurations...  
+~~~
+
+The **Create, manage, and run configurations** dialog box opens.  (It can alternatively be reached from the top menu bar: **Run** -->  **Debug Configurations...**).
+
+In the left pane, find the **IPUT_remote_debug** entry we had prepared in a previous step (under the **C/C++ Remote Application** entry.
+
+Click on the **Disable auto build** button. We have built the utility outside of eclipse.
+
+Check the **Skip download to target path**. We have already downloaded and installed the utility on the remote system.
+
+Click **Edit...** to use an existing connection, or **New...** to create a new one.
+
+Make sure this is an **ssh** entry, and check the system name (or ip address), that the user-id and password are entered correctly.  Click **Finish** when done. (There are additional options if you click on **>Advanced** option at the bottom).
+
+Click **Apply** in the **Create, manage, and run configurations** dialog box.  At this point, you can run a quick debug session if you wish.  Click **Debug** (or click **Close** to return to the eclipse main window for the next step).
+
+If you chose the **Debug** option, you should find the **Debug Perspective** open now, with the program counter paused just inside **main()** and the Console output in the bottom tab showing the details of the remote session.
+
+As shown above, the file **/tmp/testfine1** is about to be entered in iRODS.
+
+In a separate ssh session to the target system, ensure that this has not happened yet. Use the **ils** utility for this purpose:
+
+~~~
+rods@akellylt1:~$ uname -n
+akellylt1
+irods@akellylt1:~$ whoami
+irods
+irods@akellylt1:~$ ils -l
+/tempZone/home/rods:
+irods@akellylt1:~$
+~~~
+
+Let's let the debug session proceed with no additional breakpoints, so that we may check that this completed successfully.  Click on the **small green arrow** (resume) at the top bar of eclipse, to allow the iput utility to be run to completion.
+
+In the bottom pane under the **Console** tab, you should see something like this: 
+
+~~~
+gdbserver  :2345 /usr/bin/iput /tmp/testfile1;exit
+
+irods@akellylt1:~$ gdbserver  :2345 /usr/bin/iput /tmp/testfile1;exit
+Process /usr/bin/iput created; pid = 20070
+Listening on port 2345
+Remote debugging from host 172.20.0.51
+
+Child exited with status 0
+logout
+~~~
+
+Now let's go back to the separate ssh window, and check **ils** again:
+
+~~~
+rods@akellylt1:~$ uname -n
+akellylt1
+irods@akellylt1:~$ whoami
+irods
+irods@akellylt1:~$ ils -l
+/tempZone/home/rods:
+  rods              0 demoResc           29 2018-04-21.15:07 & testfile1
+irods@akellylt1:~$
+~~~
+
+And that's that: mission accomplished.  Switch back from the **Debug Perspective** to the **C/C++** perspective by clicking on the button at the top right hand side of the eclipse main window.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+## Create an Eclipse Executable Project on the Development System ##
 
 
 
