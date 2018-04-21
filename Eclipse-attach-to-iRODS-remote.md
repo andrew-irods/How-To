@@ -333,7 +333,7 @@ and again:
 Click Add... --> File System Directory --> and enter the full pathname for $work/irods
 ~~~
 
-Click "Apply" on the "Create, Manage, and run configurations" dialog box, and then click "Close".
+Click **Apply** on the **Create, Manage, and run configurations** dialog box, and then click "Close".
 
 Then, in the left (Project Explorer" pane of eclipse: 
 
@@ -393,7 +393,7 @@ Or, you can right-click on the **Sftp Files** item below the system name, and ch
 Click on the small arrow next to **Sftp Files**, and you can click through to the directory structure on the remote system.  You may be challenged for a password at this point.
 
 
-### Set Up the Eclipse Debug Configuration for the Remote Debuggin of iput ###
+### Set Up the Eclipse Debug Configuration for the Remote Debugging of iput ###
 
 In the left vertical pane of Eclipe (**Project Explorer**):
 
@@ -417,7 +417,7 @@ Click **Apply** in the **Create, manage, and run configurations** dialog box.  A
 
 If you chose the **Debug** option, you should find the **Debug Perspective** open now, with the program counter paused just inside **main()** and the Console output in the bottom tab showing the details of the remote session.
 
-As shown above, the file **/tmp/testfine1** is about to be entered in iRODS.
+As shown above, the file **/tmp/testfile1** is about to be entered in iRODS.
 
 In a separate ssh session to the target system, ensure that this has not happened yet. Use the **ils** utility for this purpose:
 
@@ -447,7 +447,7 @@ Child exited with status 0
 logout
 ~~~
 
-Now let's go back to the separate ssh window, and check **ils** again:
+Now let's go back to the separate ssh window to **akellylt1**, and check **ils** again:
 
 ~~~
 rods@akellylt1:~$ uname -n
