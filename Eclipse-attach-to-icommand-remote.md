@@ -64,17 +64,17 @@ This document assumes sufficient familiarity with Eclipse so that long winded de
 
 ### Build and copy all iRODS .deb files to remote system ###
 
-Once we have built the irods server and icommands, we should have two directories, one for each, as well as the corresponding build directories with the results of each build:
+Once we have built the irods server and icommands, we should have two directories, one for each, as well as the corresponding build directories with the results of each build. For the purpose of this document, we'll use the environment variable **$work** as the base directory for all source and build directories (on **akelly1** this is "~/github"):
 
 (These could be any directory path names):
 
-**..../github/irods** - the directory where the irods server sources were installed (from [iRODS on Github](https://github.com/irods/irods "https://github.com/irods/irods")).
+**$work/irods** - the directory where the irods server sources were installed (from [iRODS on Github](https://github.com/irods/irods "https://github.com/irods/irods")).
 
-**..../github/bld_irods** - the directory where the artifacts from the build of the irods server reside.
+**$work/bld_irods** - the directory where the artifacts from the build of the irods server reside.
 
-**..../github/irods\_client\_icommands** - the directory where the irods icommand sources were installed (from [iRODS Client iCommands on Github](https://github.com/irods/irods_client_icommands "https://github.com/irods/irods_client_icommands")). 
+**$work/irods\_client\_icommands** - the directory where the irods icommand sources were installed (from [iRODS Client iCommands on Github](https://github.com/irods/irods_client_icommands "https://github.com/irods/irods_client_icommands")). 
 
-**..../github/bld_icmds** - the directory where the artifacts from the build of the irods icommands reside. 
+**$work/bld_icmds** - the directory where the artifacts from the build of the irods icommands reside. 
 
 Also, there is an expectation here that the remote system (**akellylt1** in this case) has been installed with the standard iRODS packages in a regular configuration.  This includes an iRODS administration user called **irods** which exists on that system with the home directory of **/var/lib/irods** (typically with an unknown password); binaries installed under **/usr/bin**, **/usr/sbin**, **/var/lib/irods/**, etc. 
 
@@ -82,10 +82,10 @@ In preparation of the coming debug session, the target system **akellylt1** shou
 
 **Note:** There are other ways to do this (for example, logging in as another user who has iRODS admin authority, but for this project we're simply following this process.
 
-For example, access the remote irods system:
+For example, access the remote irods system (below, 172.20.0.104 is the ip address for akellylt1, where andrew is a regular linux user with "**sudo**" privileges):
 
 ~~~
-$ ssh andrew@akellylt1             # andrew is a regular linux user with "**sudo**" privileges
+$ ssh andrew@172.20.0.104
 # uname -n                         # This is our remote system
 akellylt1
 $ sudo su
@@ -287,7 +287,7 @@ $
 This small segment above assures us that the irods installation worked fine, and also this is the very same command we will execute remotely from eclipse on the development system.  If it worked here, it should also work there, all things being equal.
 
 
-### Create an Eclipse Executable Project ###
+### Create an Eclipse Executable Project on the Development System ###
 
 Everything is now ready on the remote system for our eclipse session. Start eclipse:
 
@@ -298,6 +298,58 @@ $ /opt/eclipse/eclipse       # Enter your own path to the eclipse executable
 . . .
 ~~~
 
+We're going to create an eclipse C++ executable project for the **iput** utility.  The focus of this project will be the iput executable created locally during the build of the **irods_client_icommand** sources.
+
+We're going to assume a blank eclipse screen - with no previous projects present.
+
+Click:
+
+~~~
+File --> Import... --> C/C++ --> C/C++ Executable 
+(click Next)
+
+Select Executable:  Enter the full path for $work/bld_icmds/iput
+(click Next)
+
+New project name: IPUT_remote_debug
+Create a Launch Configuration:  C/C++ Remote Application
+Name: IPUT_remote_debug
+(click Finish)
+~~~
+
+The dialog box for "Create, Manage, and run configurations" opens, and in the left pane, IPUT_remote_debug should be highlighted.
+
+In the right pane, in the "Arguments" tab, enter: **/tmp/testfile1**
+
+(We created the **/tmp/tesfile1** file in a previous step, on **akellylt1** while logged in as **irods**)
+
+Still on the right pane, in the **"Source"** tab:
+
+~~~ 
+Click Add... --> File System Directory --> and enter the full pathname for $work/irods_client_icommands/src
+
+and again: 
+
+Click Add... --> File System Directory --> and enter the full pathname for $work/irods
+~~~
+
+Click "Apply" on the "Create, Manage, and run configurations" dialog box, and then click "Close".
+
+Then, in the left (Project Explorer" pane of eclipse: 
+
+~~~
+Right-click on the project name "IPUT_remote_debug", then choose:
+
+"Configure >"  -->  "Configure and Detect Nested Projects..."
+~~~
+
+In the "Import Projects from File System or Archive" dialog box that opens. enter:
+
+Import source:  **Enter the full pathname for $work/irods**
+
+Make sure that the "Search for nested projects" checkbox is checked, as well as the "Detect and configure project natures" checkbox.
+
+Click **"Finish".**
 
 
 
@@ -306,96 +358,23 @@ $ /opt/eclipse/eclipse       # Enter your own path to the eclipse executable
 
 
 
-From the eclipse File menu, pick the "import..." option  (**File --> Import...**). 
-A new dialog box opens: 
-
-![Import Executable Path](images/hello-world-1-image1.png "Choose the C/C++ Executable Files target") 
-
-Pick the "C/C++ Executable" option, and click "Next". 
-A new dialog box opens: 
-
-![Import Executable Path](images/hello-world-1-image2.png "Import C/C++ Executable Files") 
-
-Click on "Select Executable", find the executable we created up above (hello-world-1), and enter its path.  Click "Next".  A new dialog box opens: 
-
-![Choose Project](images/hello-world-1-image3.png "Create an a new executable project") 
-
-Pick a project name, and name the launch configuration (you can leave the names that Eclipse chose for you if they're reasonable). Click the "Create a Launch Configuration" checkbox, and choose  "C/C++ Attach to Application" from the drop-down menu. 
-
-Click Finish. A new dialog box opens: 
-
-![Debug Configurations](images/hello-world-1-image4.png "Name the debug configuration") 
-
-Nothing has to change in the Debugger, Source, or Common tabs.  We will add source files to the project in the next step from the project explorer. 
-
-Click "Close". This should take you back to the Project Explorer window: 
-
-![Project Explorer](images/hello-world-1-image5.png "Project Explorer") 
-
-Click on the small arrow next to "**hello-world-1 - [x86_64le]**" to show the list of sources found for this executables in the previous step.  Notice that the **hello-world-1.cpp** source file is present in the list of files.  You can double-click and edit it, but this project is not geared for building the executable - just running it.
-
-At this point, we can add more source files to the project by telling eclipse to look in additional source folders if needed.  Right-click on the project name in the expolorer pane, and click on the **"Debug As" -->  "Debug Configurations..."** submenus that pop up.
- 
-A new dialog box opens (the same dialog box we saw above, but with the ability to make changes): 
-
-![Debug Configurations Again](images/hello-world-1-image6.png "Modify this configuration if needed") 
-
-Notice that you can pick additional debug configurations at this point. We'll stick to the **"C/C++ Attach to Application"** configuration for this exercise: Highlight the name of the configuration as shown above, and click the "Source" tab in the right pane.
-
-If you don't see all your sources in the explorer pane on the left (and we do - we just have our hello-world-1.cpp file), you can add source directories for eclipse to look for additional sources. 
-
-Click the **"Add..."** button, and a new dialog box opens: 
-
-![Add Sources](images/hello-world-1-image7.png "Don't click OK since we're going to cancel out of this.") 
-
-Pick the "File System Directory" in the "Add Source" dialog, and then enter the full path to the additional folder you want scanned for sources.  Note the "Search subfolders" checkbox at the bottom of the dialog box. 
-
-**For this exercise, we do not need additional source directories scanned by Eclipse, so click Cancel, and return to the main Explorer window.**
 
 
-### Run the hello-world-1 program ###
 
-Open a "terminal" (aka a shell window).  This can be done inside of eclipse, or outside of it using any terminal or ssh window.  We'll use eclipse for this.  
 
-![Set up runtime environment](images/hello-world-1-image8.png "Start a shell in the bottom pane") 
 
-The bottom horizontal pane in the eclipse workspace should have a "Terminal" tab.  If it doesn't, enter "terminal" in the "Quick Access" field on the top right of the workspace.
 
-A list of suggestions pops out. Choose "Commands | Open Local Terminal" to make this tab visible and start a shell going.  Notice that a shell prompt appears within this pane, though not necessarily in the correct directory.  Use "cd" to get to where the executable is, just like you would in any terminal window. 
 
-Start the hello-world-1 program:
 
-![Start the program](images/hello-world-1-image9.png "Start the program in the Terminal pane") 
 
-Focus your cursor within the pane, and click ENTER a couple of times.  You'll notice that the program is now running, and waiting for your next ENTER click.
 
-Time to attach the eclipse debugger to the running program. 
 
-### Attach Eclipse Debugger to the hello-world-1 Program ###
- 
-At this point, your terminal pane should show the hello-world-1 program waiting for you to click the ENTER key.  Don't do that. We're now going to attach to the running program. 
 
-Right click on the project name in the Project Explorer pane on the left.  From the drop-down menu that shows up, pick "Debug As", and then "Local C/C++ Application" from the second drop-down menu that shows up. A new dialog box then appears:
 
-![Start the debugger](images/hello-world-1-image10.png "Start the debugger") 
 
-The dialog box contains all the processes currently running, in alphabetized order.  Use the down-arrow to navigate to the "hello-world-1" process (pid = 22631, running single threaded on core# 2 at this time).  Highlight the process (by navigating to it), and click OK.  
 
-The debugger is now started, attached to the running hello-world-1 process, and eclipse switches us from the C/C++ perspective to the Debug perspective:
 
-![Debug perspective](images/hello-world-1-image11.png "Program is paused waiting for std::getline() to return") 
 
-Notice that we have switched perspectives - everything looks different here. At the top right hand corner of the workspace, there is a highlighted button (debug perspective) which we are currently in.  If we want to do something in the sources while the debugger is running, we can, by switching back to the C/C++ perspective, by clicking on the button to the left of the debug perspective (hover over the button to see what each button is).  We could then go back to the debugger by clicking the debug perspective button. 
-
-As soon as the debugger starts, it pauses all the the running threads in the process (with a breakpoint) - in our case there is a single thread which is paused.  It displays the stack for each thread in the top-left pane, various information (see tabs) in the top-right pane, and the source line equivalent to the paused thread at the top of the stack (which we don't have sources to, as you can see). 
-
-In order to step through our code, and/or set breakpoints, etc - we need to switch to the stack level we want, and that we have sources for.  In this case, it's the bottom of the stack, at hello-world-1.cpp line 12.  So highlight that:
-
-![Go the the bottom of the stack](images/hello-world-1-image12.png "Examine our sources at the breakpoint") 
-
-There's a lot going on here, now that we are looking at a stack level that we have sources for.  If we continued to step through the code, you could see the program counter progressing through the code, variable values changing, and observe what's happening to the stack.
-
-However, we are at an end here - we've attached eclipse to a running sources, and for the rest of what's possible here - it's way outside the scope of this document.  Back to the google machine (search for how to debug a program using eclipse).
 
 
 
