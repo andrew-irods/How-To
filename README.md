@@ -10,4 +10,4 @@ For someone who is new to Eclipse, these How-To's are recommended in the followi
 
 [How to Attach Eclipse to a Running irodsServer Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-irodsServer.md)
 
-[How to Debug a Remote iCommand with Eclipse](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-iCommand-remote.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-iCommand-remote.md") 
+[How to Configure and Debug a Remote iCommand with Eclipse](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-iCommand-remote.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-iCommand-remote.md") 
