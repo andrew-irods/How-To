@@ -1,5 +1,3 @@
-### THIS PAGE IS UNDER CONSTRUCTION -- PLEASE IGNORE FOR NOW ###
-
 # How to Configure and Debug a Remote iCommand with Eclipse #
 
 This document demonstrates how to attach the Eclipse IDE to an iCommand utility on a remote system. 
