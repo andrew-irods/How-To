@@ -1,14 +1,14 @@
 ### THIS PAGE IS UNDER CONSTRUCTION -- PLEASE IGNORE FOR NOW ###
 
-# How to Attach Eclipse to a Remote Running iRODS System #
+# How to Configure and Debug a Remote iCommand with Eclipse #
 
-This document demonstrates how to attach the Eclipse IDE to an iRODS system (icommand client and server) on a remote system. 
+This document demonstrates how to attach the Eclipse IDE to an iCommand utility on a remote system. 
 
 The local system (**akelly1** in this document) is the development system, and includes a full set of iRODS sources (from github) that are built as a full package build, to provide us with debug objects to install and run on the target remote system (**akellylt1** in this document).  Since both **akelly1** and **akellylt1** are Ubuntu 16.04 systems, the packages we focus on will be .deb files.  An equivalent process for Redhat derived systems (like CentOS, RHEL, etc) would involve .rpm packages.
 
 The connection to the remote system will be based on **ssh**.  It is recommended that ssh keys be installed to avoid being challenged for a password on every connection.  YMMV.
 
-Following the process in this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on a remote system.  We will then create a separate project for the **irodsServer** process as an executable, and then create a remote debug configuration that will allow us to attach eclipse to the remote running **irodsServer** which interacts with our **iput** utility.  None of these Eclipse configurations allow building the actual sources - that's not the intent.  They're used for the purpose of allowing the debugger access to the sources as programs are being debugged.
+Following the process in this document, we will create an eclipse project that targets an existing icommand linux executable (**iput**), and create a remote debug launch configuration which can launch and debug the utility on the remote system. None of the Eclipse configurations discussed here allow building the actual sources - that's not the intent.  They're used for the purpose of allowing the debugger access to the sources as programs are being debugged.
 
 
 ### The Thing with Eclipse ###
@@ -32,11 +32,11 @@ In fact, we rely on the setup for the projects described below in order to start
 
 [How to Create an Eclipse project for /usr/bin/ireg](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-icommand-executable.md)
 
-[How to Attach Eclipse to a Running irodsServer Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-irodsServer.md)
-
 **Also, these won't hurt:**
 
 [How to Attach Eclipse to a Running Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md "https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-running-process.md")
+
+[How to Attach Eclipse to a Running irodsServer Process](https://github.com/andrew-irods/How-To/blob/master/Eclipse-attach-to-irodsServer.md)
 
 [Youtube video:  GDB Remote Debugging using LUbuntu Linux and Eclipse CDT Neon 3](https://www.youtube.com/watch?v=KbN1UyybsV4  "https://www.youtube.com/watch?v=KbN1UyybsV4")
 
@@ -106,35 +106,7 @@ $
 
 As you can see above, you are logged in as the user **irods**, with the current working directory set at **/var/lib/irods**, and you can proceed with entering ssh keys on both the target system, as well as on your own development system if you wish.
 
-This is a good point in the process to adjust the Yama linux security module ptrace scope variable (ref. [https://www.kernel.org/doc/Documentation/security/Yama.txt](https://www.kernel.org/doc/Documentation/security/Yama.txt)).  While you are still superuser on the target system, do this:
-
-~~~
-$ uname -n                          $ This is our remote system
-akellylt1
-$ whoami
-$ irods
-$ exit                              $ Go back to being superuser
-#
-# sysctl kernel.yama.ptrace_scope
-kernel.yama.ptrace_scope = 1
-#
-~~~
-
-If the value displayed is "0", that is the current value of the ptrace_scope variable in the kernel, and you don't have to do anything else.  If it is any other value, do this:
-
-~~~
-# sysctl kernel.yama.ptrace_scope=0
-kernel.yama.ptrace_scope = 0
-#
-# exit
-$ whoami
-andrew
-$
-~~~
-
-This will allow the debugging session (local or remote) to attach gdb and eclipse to the running server process that's detached.  You might have to do this again after the next time the remote system is rebooted. 
-
-Log out from the remote iRODS system (**akellylt1**) and back to your development system at the directory where iRODS was built from source. Of course, you can keep the remote ssh session open, and simply use another window for the local development system -- this might be a good idea, since we still have to install the .deb packages that will be transferred over from the development system:
+Log out from the remote iRODS system (**akellylt1**) and back to your development system at the directory where iRODS was built from source. Although you might want to keep the remote ssh session open, and simply use another window for the local development system.  This might be a good idea, since we still have to install the .deb packages that will be transferred over from the development system:
 
 On the local development system (**akelly1**):
 
@@ -461,17 +433,4 @@ irods@akellylt1:~$
 ~~~
 
 And that's that: mission accomplished.  Switch back from the **Debug Perspective** to the **C/C++** perspective by clicking on the button at the top right hand side of the eclipse main window.
-
-
-## Create an Eclipse Executable Project irodsServer on the Development System ##
-
-
-
-
-
-
-
-
-
-
 
